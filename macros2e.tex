@@ -31,12 +31,14 @@ sorted in the correct category.
 
 Some of the following integer values are defined using \Macro\countdef\relax (for $-1$), \Macro\chardef\relax (for values between 0--255) and \Macro\mathchardef\relax ($>255$).
 There are robust and do not expand in an \Macro\edef\relax context. When used on the right side of an assignment the act the 
-same way as a counter register.  The |\m@ne| is a real counter register and can still be modified, but doing so would certainly break various code.
+same way as a count register.  The |\m@ne| is a real count register and can still be modified, but doing so would certainly break various code.
+In the terms defined by \emph{The TeXbook}, this integer constants yield \emph{internal integers} rather than \emph{integer denotations}.
 
 The other numbers are defined simply using macros, which will expand as normal.
 They were defined to be used to set the font sizes, which explains the non-integer numbers.
 Please note that if they are used for an assignment or other numeric context (e.g.\ |\ifnum|)
 TeX will keep expanding the following tokens until it will find a non-numeric token, like a space or |\relax|.
+
 
 \bigskip
 \noindent\hbox to \linewidth\bgroup\hss
@@ -146,13 +148,15 @@ with tokens read by |\let| or |\futurelet|.
 
 \subsection{Other}
 
-\begin{tabular}{llll}
+\begin{tabularx}{\linewidth}{lllX}
   \toprule
-    Macro          & Value  & Defined using & Notes \\
+    Macro            & Value   & Defined using & Notes \\
   \midrule
-   \Macro\void@box & (void) & newbox        & permanently void box register \\
+   \Macro\void@box   & (void)  & newbox        & permanently void box register \\
+   \Macro\@undefined & (undef) & (undefined)   & This macro is not defined.
+       It is used to test if other macros are undefined (using \Macro\ifx) or set them to an undefined state (using \Macro\let).\\
   \bottomrule
-\end{tabular}
+\end{tabularx}
 
 
 \clearpage
@@ -330,7 +334,7 @@ This auxiliary macros were originally defined to handle font changes but can be 
    \Macro\@obsoletefile{<new>}{<obsolete>} & Prints warning message (only) that now a different file is used a input.\\
    \Macro\@addtofilelist{<filename>} &  Adds the given filename to the list of files. Only active if \cs{listfiles} is used in the preamble. \\
    \Macro\@ptionlist{<filename>} & Expands the option list of package, class or file given by full filename. \\
-   \Macro\zap@space<text>!\verb*+ +!\AlsoMacro\@empty & Removes all spaces from \meta{text}. \\
+   \Macro\zap@space<text>!\verb*+ +!\AlsoMacro\@empty & Removes all spaces from \meta{text}. Expandable. \\
 \end{tabularx}
 \par\noindent
 \begin{tabularx}{\linewidth}{lX}
