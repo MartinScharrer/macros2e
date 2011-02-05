@@ -130,7 +130,7 @@ The following macros hold common strings and are expandable.
 \end{tabularx}
 
 \subsection{Token Constants}
-The following macros are defined using \Macro\let<\textbackslash macro>'='<token> and therefore equal to this token. They are useful for |\ifx| comparisons
+The following macros are defined using \Macro\let!\@backslashchar!<macro>'='<token> and therefore equal to this token. They are useful for |\ifx| comparisons
 with tokens read by |\let| or |\futurelet|.
 
 \bigskip\noindent
@@ -198,13 +198,13 @@ They can be used with care, but should be only redefined inside a local group.
    \toprule
    Macro & Description \\
    \midrule
-   \Macro\@namedef{<name>}<parameter list>{<definition>} & Define macro \MacroArgs<\textbackslash name> \relax(using \Macro\def). \\
-   \Macro\@nameuse{<name>}  &  Expands to \MacroArgs<\textbackslash name>. \\
+   \Macro\@namedef{<name>}<parameter list>{<definition>} & Define macro \MacroArgs!\@backslashchar!<name> \relax(using \Macro\def). \\
+   \Macro\@nameuse{<name>}  &  Expands to \MacroArgs!\@backslashchar!<name>. \\
    \Macro\@ifnextchar<token>{<yes>}{<no>} & Tests if next non-space token is equal to \MacroArgs<token>. \\
    \Macro\@ifstar{<yes>}{<no>} & Tests of next non-space token is `|*|`. Removes star for \MacroArgs<yes> branch.   \\
    \Macro\@dblarg{<cmd>}{<arg>} & Expands to \MacroArgs<cmd>[<arg>]{<arg>}. \\
-   \Macro\@ifundefined{<name>}{<yes>}{<no>} & Tests if \MacroArgs<\textbackslash name> is defined (and not equal to \Macro\relax). \\
-   \Macro\@ifdefineable<\textbackslash name>{<yes>} & Tests if \MacroArgs<\textbackslash name> is undefined, \MacroArgs<name> not `|relax|'
+   \Macro\@ifundefined{<name>}{<yes>}{<no>} & Tests if \MacroArgs!\@backslashchar!<name> is defined (and not equal to \Macro\relax). \\
+   \Macro\@ifdefineable!\@backslashchar!<name>{<yes>} & Tests if \MacroArgs!\@backslashchar!<name> is undefined, \MacroArgs<name> not `|relax|'
         and doesn't start with `|end|', and if \Macro{end}<name> is not defined. \\
    \Macro\@onlypreamlbe<macro> & The given \meta{macro} is marked as only be valid in the preamble. It will be redefined as an error message AtBeginDocument.\\
    \Macro\@star@or@long & Tests for a following `|*|', if found \Macro\l@ngrel@x will be let to \Macro\relax, but \Macro\long otherwise. \\
@@ -241,11 +241,11 @@ They can be used with care, but should be only redefined inside a local group.
    \Macro\@whilenum <test>  \AlsoMacro\do {<body>}  &  While loop with \Macro\ifnum test.  \\
    \Macro\@whiledim <test>  \AlsoMacro\do {<body>}  &  While loop with \Macro\ifdim test.  \\
    \Macro\@whilesw <switch> \AlsoMacro\fi {<body>}  &  While loop with \MacroArgs<switch> test.  \\
-   \Macro\@for<\textbackslash macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is supposed to expand to a comma separated list.
-        Defines \MacroArgs<\textbackslash macro> to each element of the list and executes \meta{body} each time.
+   \Macro\@for!\@backslashchar!<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is supposed to expand to a comma separated list.
+        Defines \MacroArgs!\@backslashchar!<macro> to each element of the list and executes \meta{body} each time.
         Supports an empty lists without errors. \\
-   \Macro\@tfor<\textbackslash macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is not expanded and taken as a list of tokens or |{...}|.
-        Defines \MacroArgs<\textbackslash macro> to each element of the list and executes \meta{body} each time.
+   \Macro\@tfor!\@backslashchar!<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is not expanded and taken as a list of tokens or |{...}|.
+        Defines \MacroArgs!\@backslashchar!<macro> to each element of the list and executes \meta{body} each time.
         Supports an empty lists without errors. \\
    \Macro\@break@tfor & Break out of a \Macro\@tfor loop. This should be called \emph{inside} the scope of an |\fi|.\\
    \bottomrule
@@ -254,6 +254,21 @@ NOTES:\\
 1. These macros use no |\@temp| sequences.\\
 2. These macros do not work if the body contains anything that
 looks syntactically to TeX like an improperly balanced |\if \else \fi|.\\
+
+\subsection{Auxiliary Macros}
+This auxiliary macros were originally defined to handle font changes but can be used for other code as well.
+\par\bigskip\noindent
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
+   \Macro\ifnot@nil & Takes one argument and checks if it is the token \Macro\@nil. If so calls \Macro\@gobble, otherwise \Macro\@firstofone on the following argument. \\
+   \Macro\@nil  & This macro is undefined on purpose and used as endmarker in loops and other macros which process token lists. \\
+   \Macro\@nnil & Definition contains only \Macro\@nil and is used beside others to test for the presents of \Macro\@nil in \Macro\ifnot@nil. Is also used as endmarker.\\
+   \Macro\remove@to@nnil & Removes everything behind it until and including \Macro\@nnil.\\
+   \Macro\remove@star & Removes everything behind it until and including \Macro\@nnil.\\
+   \bottomrule
+\end{tabularx}
 
 \subsection{Messages}
    \DescribeMacro\MessageBreak
@@ -276,7 +291,7 @@ looks syntactically to TeX like an improperly balanced |\if \else \fi|.\\
   \midrule
    \Macro\strip@prefix & removes everything up to and including to the next |>| \\
    \Macro\@sanitize & Changes catcodes of everything except braces to `other' (12).\\
-   \Macro\@onelevel@sanitize<\textbackslash macro> & Sanitizes \meta{\textbackslash macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode `other' (12)!
+   \Macro\@onelevel@sanitize!\@backslashchar!<macro> & Sanitizes \meta{\textbackslash macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode `other' (12)!
                               Uses \Macro\meaning and \Macro\strip@prefix. \\
    \Macro\filename@parse{<filename>} & Parses \meta{filename} and provides its directory, base and extension
                                 in \Macro\filename@area, \Macro\filename@base and \Macro\filename@ext. The latter is let to \Macro\relax if it does not exists. \\
@@ -285,7 +300,7 @@ looks syntactically to TeX like an improperly balanced |\if \else \fi|.\\
    \Macro\rem@pt<dimension value> & Awaits a value dimension value (iii.fffpt) as string where the `pt' is removed. If `fff' is numerical equal to 0, it and the decimal dot are removed as well. \\
    \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the `pt' using \cs{rem@pt}. \\
    \Macro\addto@hook{<token register>}{<code>} & Appends code to the token register. \\
-   \Macro\g@addto@hook{<\textbackslash macro>}{<code>} & Appends \meta{code} to the definition of \MacroArgs<\textbackslash macro>.\\
+   \Macro\g@addto@hook{!\@backslashchar!<macro>}{<code>} & Appends \meta{code} to the definition of \MacroArgs!\@backslashchar!<macro>.\\
    \Macro\null & Empty \Macro\hbox. Good to fill places which must not be empty. \\
    \Macro\strutbox & Box with dimension of |\strut|. Can be used to extract this dimension with |\wd\strutbox|, |\ht\strutbox| and |\dp\strutbox|. \\
  \bottomrule
