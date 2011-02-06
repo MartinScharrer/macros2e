@@ -125,10 +125,12 @@ The following macros hold common strings and are expandable.
    \Macro\@spaces & Four spaces \\
    \Macro\empty & Empty string  & Commonly used to define empty macros using \Macro\let. \\
    \Macro\@empty & Empty string & Same as above. Used by the \LaTeX{} kernel commands. \\
-   \Macro\@backslashchar & ``\texttt{\@backslashchar}'' & Backslash with catcode 12, i.e. simple ASCII backlash usable in e.g.\ \Macro\write.\\
-   \Macro\@percentchar   & ``\texttt{\@percentchar}'' & Percent character with catcode 12, i.e. simple ASCII percent usable in e.g.\ \Macro\write.\\
-   \Macro\@clsexternsion & ``\texttt{cls}'' \\
-   \Macro\@pkgexternsion & ``\texttt{sty}'' \\
+   \Macro\@backslashchar & ``\texttt{\@backslashchar}'' & Backslash with catcode 12 (other), i.e. simple ASCII backlash usable in e.g.\ \Macro\write.\\
+   \Macro\@percentchar   & ``\texttt{\@percentchar}'' & Percent character with catcode 12 (other), i.e. simple ASCII percent usable in e.g.\ \Macro\write.\\
+   \Macro\@charlb        & ``\texttt{\@charlb}'' & Left brace with catcode 11 (letter). \\
+   \Macro\@charrb        & ``\texttt{\@charrb}'' & Right brace with catcode 11 (letter). \\
+   \Macro\@clsextension  & ``\texttt{cls}'' \\
+   \Macro\@pkgextension  & ``\texttt{sty}'' \\
   \bottomrule
 \end{tabularx}
 
@@ -307,7 +309,8 @@ This auxiliary macros were originally defined to handle font changes but can be 
    \Macro\addto@hook{<token register>}{<code>} & Appends code to the token register. \\
    \Macro\g@addto@hook{!\@backslashchar!<macro>}{<code>} & Appends \meta{code} to the definition of \MacroArgs!\@backslashchar!<macro>.\\
    \Macro\null & Empty \Macro\hbox. Good to fill places which must not be empty. \\
-   \Macro\strutbox & Box with dimension of |\strut|. Can be used to extract this dimension with |\wd\strutbox|, |\ht\strutbox| and |\dp\strutbox|. \\
+   \Macro\strutbox & Box with dimension of |\strut|. Can be used to extract this dimension with |\ht\strutbox| and |\dp\strutbox| (width=0). \\
+   \Macro\@arstrutbox &! Defined inside array and tabular. Like \Macro\strutbox but stretched by \Macro\arraystretch. \\
  \bottomrule
 \end{tabularx}
 %   \Macro\void@box & (void) & newbox & permanently void box register \\
@@ -409,6 +412,16 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
 \end{tabularx}
 
 
+
+\par\bigskip\noindent
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
+     \Macro\@alph{<number>} & Expands to lower case letter corresponding to the given number (1=a, 2=b, \ldots). Expands to \Macro\@ctrerr if number is larger then 26.\\
+     \Macro\@Alph{<number>} & Expands to upper case letter corresponding to the given number (1=A, 2=B, \ldots). Expands to \Macro\@ctrerr if number is larger then 26.\\
+   \bottomrule
+\end{tabularx}
 
 
 \end{document}
