@@ -1,16 +1,15 @@
 %&pdflatex
 % $Id$
-\documentclass[12pt]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{ydoc}
 
 \usepackage{booktabs}
 \usepackage{tabularx}
-\usepackage{verbdef}
 
 \title{List of internal \LaTeX2e Macros useful to Package Authors}
 \author{Compiled by Martin Scharrer\\\url{martin@scharrer-online.de}}
-\date{Version 0.1a -- February 5th 2011}
+\date{Version 0.2 -- February 9th 2011}
 
 \makeatletter
 \begin{document}
@@ -142,7 +141,7 @@ This makes them useful if such characters are to be written into an auxiliary fi
 \end{tabularx}
 
 \subsection{Token Constants}
-The following macros are defined using \Macro\let!\@backslashchar!<macro>'='<token> and therefore equal to this token. They are useful for |\ifx| comparisons
+The following macros are defined using \Macro\let<macro>'='<token> and therefore equal to this token. They are useful for |\ifx| comparisons
 with tokens read by |\let| or |\futurelet|.
 
 \bigskip\noindent
@@ -170,7 +169,9 @@ with tokens read by |\let| or |\futurelet|.
 
 
 \clearpage
-\section{Temporary Variables}
+\section{Variables}
+
+\subsection{Temporary Variables}
 The following variables are defined and used by the \LaTeX{} kernel commands as scratch registers and macros.
 They can be used with care, but should only be redefined inside a local group to avoid interference with other
 code. Care must also be taken if they are used together with external macros, which might use them as well
@@ -205,30 +206,78 @@ code. Care must also be taken if they are used together with external macros, wh
   \bottomrule
 \end{tabularx}
 
-\clearpage
-\section{Macros}
 
-\subsection{Macro Definition}
+\subsection{String Variables}
+
 \par\bigskip\noindent
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
    \midrule
-   \Macro\@namedef{<name>}<parameter list>{<definition>} & Define macro \MacroArgs!\@backslashchar!<name> \relax(using \Macro\def). \\
-   \Macro\@nameuse{<name>}  &  Expands to \MacroArgs!\@backslashchar!<name>. \\
-   \Macro\@ifnextchar<token>{<yes>}{<no>} & Tests if next non-space token is equal to \MacroArgs<token>. \\
-   \Macro\@ifstar{<yes>}{<no>} & Tests of next non-space token is `|*|`. Removes star for \MacroArgs<yes> branch.   \\
-   \Macro\@dblarg{<cmd>}{<arg>} & Expands to \MacroArgs<cmd>[<arg>]{<arg>}. \\
-   \Macro\@ifundefined{<name>}{<yes>}{<no>} & Tests if \MacroArgs!\@backslashchar!<name> is defined (and not equal to \Macro\relax). \\
-   \Macro\@ifdefineable!\@backslashchar!<name>{<yes>} & Tests if \MacroArgs!\@backslashchar!<name> is undefined, \MacroArgs<name> not `|relax|'
-        and doesn't start with `|end|', and if \Macro{end}<name> is not defined. \\
-   \Macro\@onlypreamlbe<macro> & The given \meta{macro} is marked as only be valid in the preamble. It will be redefined as an error message AtBeginDocument.\\
-   \Macro\@star@or@long & Tests for a following `|*|', if found \Macro\l@ngrel@x will be let to
-   \Macro\relax, but \Macro\long otherwise. It can the be used before \Macro\def as an potential prefix.\\
-   \Macro\@testopt{<1>}{<2>}  &  Short for \Macro\@ifnextchar'['{<1>}{<1>[{<2>}]}, i.e.\ \meta{2} will be used as default argument if non was given. \\
-   \Macro\@protected@testopt & Robust version of \Macro\@testopt? \\
+   \Macro\@currext   & Extension of the current package or class file, empty outside. \\
+   \Macro\@currname  & File name base of the current package or class file, empty outside. \\
+   \Macro\@currenvir & Name of the current environment. \\
    \bottomrule
 \end{tabularx}
+
+
+\clearpage
+\section{Macros}
+
+\subsection{Macro Definition}
+\DescribeMacro\@namedef{<name>}<parameter list>{<definition>}
+\noindent
+Defines macro \MacroArgs'\'<name>\relax using \Macro\def. Can be prefixed with \Macro\long and \Macro\global.
+
+\DescribeMacro\@nameuse{<name>}
+\noindent
+Expands to macro \MacroArgs'\'<name>.
+
+\DescribeMacro\@ifnextchar<token>{<yes>}{<no>}
+\noindent
+Tests if next non-space token is equal to \MacroArgs<token>. 
+
+\DescribeMacro\@ifstar{<yes>}{<no>}
+\noindent
+Tests of next non-space token is `|*|`. Removes star for \MacroArgs<yes> branch.   
+
+\DescribeMacro\@dblarg{<cmd>}{<arg>}
+\noindent
+Expands to \MacroArgs<cmd>[<arg>]{<arg>}. 
+
+\DescribeMacro\@ifundefined{<name>}{<yes>}{<no>}
+\noindent
+Tests if \MacroArgs!\@backslashchar!<name> is defined (and not equal to \Macro\relax). 
+
+\DescribeMacro\@ifdefineable!\@backslashchar!<name>{<yes>}
+\noindent
+Tests if \MacroArgs!\@backslashchar!<name> is undefined, \MacroArgs<name> not `|relax|'
+and doesn't start with `|end|', and if \Macro{end}<name> is not defined. 
+
+\DescribeMacro\@onlypreamlbe<macro>
+\noindent
+The given \meta{macro} is marked as only be valid in the preamble. It will be redefined as an error message AtBeginDocument.
+
+\DescribeMacro\@star@or@long
+\noindent
+Tests for a following `|*|', if found \Macro\l@ngrel@x will be let to \Macro\relax, but \Macro\long
+otherwise. It can the be used before \Macro\def as an potential prefix.
+
+\DescribeMacro\@testopt{<1>}{<2>} 
+\noindent
+Short for \Macro\@ifnextchar'['{<1>}{<1>[{<2>}]}, i.e.\ \meta{2} will be used as default argument if non was given. 
+
+\DescribeMacro\@protected@testopt
+\noindent
+Robust version of \Macro\@testopt? 
+
+\DescribeMacro\addto@hook<token register>{<code>}
+\noindent
+Appends code to the token register. 
+
+\DescribeMacro\g@addto@hook<macro>{<code>}
+\noindent
+Appends \meta{code} to the definition of \MacroArgs<macro>.\\
 
 \subsection{Expanding/Gobbling Arguments}
 \par\bigskip\noindent
@@ -258,11 +307,11 @@ code. Care must also be taken if they are used together with external macros, wh
    \Macro\@whilenum <test>  \AlsoMacro\do {<body>}  &  While loop with \Macro\ifnum test.  \\
    \Macro\@whiledim <test>  \AlsoMacro\do {<body>}  &  While loop with \Macro\ifdim test.  \\
    \Macro\@whilesw <switch> \AlsoMacro\fi {<body>}  &  While loop with \MacroArgs<switch> test.  \\
-   \Macro\@for!\@backslashchar!<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is supposed to expand to a comma separated list.
-        Defines \MacroArgs!\@backslashchar!<macro> to each element of the list and executes \meta{body} each time.
+   \Macro\@for<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is supposed to expand to a comma separated list.
+        Defines \MacroArgs<macro> to each element of the list and executes \meta{body} each time.
         Supports an empty lists without errors. \\
-   \Macro\@tfor!\@backslashchar!<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is not expanded and taken as a list of tokens or |{...}|.
-        Defines \MacroArgs!\@backslashchar!<macro> to each element of the list and executes \meta{body} each time.
+   \Macro\@tfor<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is not expanded and taken as a list of tokens or |{...}|.
+        Defines \MacroArgs<macro> to each element of the list and executes \meta{body} each time.
         Supports an empty lists without errors. \\
    \Macro\@break@tfor & Break out of a \Macro\@tfor loop. This should be called \emph{inside} the scope of an |\fi|.\\
    \bottomrule
@@ -292,21 +341,25 @@ This auxiliary macros were originally defined to handle font changes but can be 
 \end{tabularx}
 
 \subsection{Messages}
-   \DescribeMacro\MessageBreak
-   \noindent
-   Inside a message this macro create a new line followed by a continuation line begun with \Macro\@msg@continuation. Outside it is equal to |\relax|.
+\DescribeMacro\MessageBreak
+\noindent
+Inside a message this macro create a new line followed by a continuation line begun with \Macro\@msg@continuation. Outside it is equal to |\relax|.
 
-   \DescribeMacro\GenericInfo{<continuation>}{<message>}
-   \noindent
-   Prints \meta{message} to a log file. Included \Macro\MessageBreak\relax's will cause a new line which start with \meta{continuation}.
+\DescribeMacro\GenericInfo{<continuation>}{<message>}
+\noindent
+Prints \meta{message} to a log file. Included \Macro\MessageBreak\relax's will cause a new line which start with \meta{continuation}.
 
-   \DescribeMacros
-     \hbox{\Macro\GenericError{<continuation>}{<error message>}}%
-     \hbox{\phantom{\ttfamily\textbackslash GenericError}\MacroArgs{<where to go for further information>}{<help text>}}%
-   \endDescribeMacros
-   \noindent
-   Print error message to log file followed by the `further information' line.
-   The help text is displayed if the user presses `|h|'.
+\DescribeMacros
+  \hbox{\Macro\GenericError{<continuation>}{<error message>}}%
+  \hbox{\phantom{\ttfamily\textbackslash GenericError}\MacroArgs{<where to go for further information>}{<help text>}}%
+\endDescribeMacros
+\noindent
+Print error message to log file followed by the `further information' line.
+The help text is displayed if the user presses `|h|'.
+
+\DescribeMacro\wlog{<log message>}
+\noindent
+Write on log file only.
 
 \par\bigskip\noindent
 \begin{tabularx}{\linewidth}{lX}
@@ -315,28 +368,27 @@ This auxiliary macros were originally defined to handle font changes but can be 
   \midrule
    \Macro\zap@space<text>!\verb*+ +!\AlsoMacro\@empty & Removes all spaces from \meta{text}. Expandable. \\
    \Macro\strip@prefix & Removes everything up to and including to the next `|>|' \\
+   \Macro\@makeother{<letter>} & Changes the catcode of the letter to `other' (12). Special letters must be escaped with a backslash. \\
    \Macro\@sanitize & Changes catcodes of everything except braces to `other' (12).\\
-   \Macro\@onelevel@sanitize!\@backslashchar!<macro> & Sanitizes \meta{\textbackslash macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode `other' (12)!
+   \Macro\@onelevel@sanitize<macro> & Sanitizes \meta{macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode `other' (12)!
                               Uses \Macro\meaning and \Macro\strip@prefix. \\
-   \Macro\filename@parse{<filename>} & Parses \meta{filename} and provides its directory, base and extension
-                                in \Macro\filename@area, \Macro\filename@base and \Macro\filename@ext. The latter is let to \Macro\relax if it does not exists. \\
-   \Macro\wlog{<log message>}  & Write on log file only. \\
-   \Macro\@settopoint<register> & Rounds register to whole number of points. \\
-   \Macro\rem@pt<dimension value> & Awaits a value dimension value (\MacroArgs<int>'.'<frac>'pt') as string where the `|pt|' is removed. If \meta{frac} is numerical equal to 0, then it and the decimal dot are removed as well. \\
-   \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the `|pt|' using \Macro\rem@pt. \\
-   \Macro\addto@hook{<token register>}{<code>} & Appends code to the token register. \\
-   \Macro\g@addto@hook<macro>{<code>} & Appends \meta{code} to the definition of \MacroArgs<macro>.\\
-   \Macro\null & Empty \Macro\hbox. Good to fill places which must not be empty. \\
-   \Macro\strutbox & Box with dimension of |\strut|, i.e.\ maximum height and depth of the current font and zero width. Can be used to extract this dimension
-                     with \texttt{\string\ht\string\strutbox} and \texttt{\string\dp\string\strutbox}. \\
-   \Macro\@arstrutbox & Defined inside array and tabular. Like \Macro\strutbox but stretched by \Macro\arraystretch. \\
  \bottomrule
 \end{tabularx}
-%   \Macro\void@box & (void) & newbox & permanently void box register \\
-
-\section{File related Macros}
 
 \par\bigskip\noindent
+\begin{tabularx}{\linewidth}{lX}
+  \toprule
+  Name   &   Description    \\
+  \midrule
+   \Macro\@settopoint<register>   & Rounds register to whole number of points. \\
+   \Macro\rem@pt<dimension value> & Awaits a value dimension value (\MacroArgs<int>'.'<frac>'pt') as string where the `|pt|' is removed. If \meta{frac} is numerical equal to 0, then it and the decimal dot are removed as well. \\
+   \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the `|pt|' using \Macro\rem@pt. \\
+ \bottomrule
+\end{tabularx}
+
+
+\subsection{File related Macros}
+
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
@@ -345,13 +397,26 @@ This auxiliary macros were originally defined to handle font changes but can be 
    \Macro\if@partsw & \\
    \Macro\input@path & List of input paths. Each path should be enclosed in braces with no delimiters between paths. \\
    \Macro\@filelist & The comma separated list of all files read so far. Only active if \cs{listfiles} is used in the preamble. \\
-   \Macro\@currname & Name of the current package or option. \\
-   \Macro\@currnext & Current file extension. \\
    \Macro\@classoptionslist & List of options of the main class. \\
    \Macro\@unusedoptionlist & List of options to the main class that haven't been declared. \\
    \bottomrule
 \end{tabularx}
-\par\noindent
+
+\DescribeMacro\filename@parse{<filename>}
+\noindent
+Parses \meta{filename} and provides its directory, name base and extension in \Macro\filename@area,
+\Macro\filename@base and \Macro\filename@ext. The latter is let to \Macro\relax if it does not
+exists.
+
+\DescribeMacro\@starttoc{<ext>}
+\noindent
+Reads the file with the given extension (\texttt{\string\jobname.}\meta{ext}) and opens it for
+writing afterwards. The file is initially empty. Creates the output file handle \Macro\tf@<ext>.
+
+\DescribeMacro\@writefile{<ext>}{<code>}
+\noindent
+Writes code using the output handle \Macro\tf@<ext> if it exists.
+
 
 \DescribeMacro\@iffileonpath{<filename>}
 \noindent
@@ -386,8 +451,6 @@ Tests if given package has been loaded with a version more recent than \meta{ver
 Tests if given class has been loaded with a version more recent than \meta{version}.
 
 
-\section{Other}
-
 \subsection{Saved plain\TeX{} primitives}
 The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved away first:
 
@@ -413,8 +476,7 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
    \bottomrule
 \end{tabularx}
 
-\subsection{Not yet sorted}
-\par\bigskip\noindent
+\subsection{Space Hack}
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
@@ -428,40 +490,21 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
    \bottomrule
 \end{tabularx}
 
-\par\bigskip\noindent
+\subsection{Boxes}
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
    \midrule
-   \Macro\@currenvir & Name of the current environment. \\
-   \Macro\@currext   & Extension of the current file. Only valid inside class and package files, empty otherwise. \\
-   \Macro\@currname  & Name of the current file. Only valid inside class and package files, empty otherwise. \\
-   \bottomrule
-\end{tabularx}
-
-\par\bigskip\noindent
-\begin{tabularx}{\linewidth}{lX}
-   \toprule
-   Macro & Description \\
-   \midrule
-   \Macro\@starttoc{<ext>} & Reads the file with the given extension (\texttt{\string\jobname.}\meta{ext}) and opens it for writing afterwards. The file is initially empty. Creates the output file handle \Macro\tf@<ext>.\\
-   \Macro\@writefile{<ext>}{<code>} & Writes code using the output handle \Macro\tf@<ext> if it exists.\\
-   \Macro\@makeother{<letter>} & Changes the catcode of the letter to `other' (12). Special letters must be escaped with a backslash. \\
-   \bottomrule
-\end{tabularx}
-
-\par\bigskip\noindent
-\begin{tabularx}{\linewidth}{lX}
-   \toprule
-   Macro & Description \\
-   \midrule
-   \Macro\@begin@tempboxa{<box>}{<content>} & Stores \meta{content} into \Macro\@tempboxa as \meta{box} (\cs{hbox} or \cs{vbox}) and stores its dimension into \Macro\width, \Macro\height, \Macro\depth and \Macro\totalheight. \\
+   \Macro\null & Empty \Macro\hbox. Good to fill places which must not be empty. \\
+   \Macro\strutbox & Box with dimension of |\strut|, i.e.\ maximum height and depth of the current font and zero width. Can be used to extract this dimension
+                     with \texttt{\string\ht\string\strutbox} and \texttt{\string\dp\string\strutbox}. \\
+   \Macro\@arstrutbox & Defined inside array and tabular. Like \Macro\strutbox but stretched by \Macro\arraystretch. \\
+   \Macro\@begin@tempboxa<box>{<content>} & Stores \meta{content} into \Macro\@tempboxa as \meta{box} (\cs{hbox} or \cs{vbox}) and stores its dimension into \Macro\width, \Macro\height, \Macro\depth and \Macro\totalheight. \\
    \Macro\@end@tempboxa  & Ends a \Macro\@begin@tempboxa environment. \\
    \bottomrule
 \end{tabularx}
 
-
-\par\bigskip\noindent
+\subsection{Base Conversion}
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
@@ -472,7 +515,5 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
    \bottomrule
 \end{tabularx}
 
-
 \end{document}
-
 
