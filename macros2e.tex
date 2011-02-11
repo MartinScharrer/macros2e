@@ -325,6 +325,12 @@ looks syntactically to TeX like an improperly balanced |\if \else \fi|.
 \end{enumerate}
 
 \subsection{Auxiliary Macros}
+
+\DescribeMacro\in@{<1>}{<2>}
+\noindent
+Checks if first argument occurs in the second and sets the switch \Macro\ifin@ accordantly.
+The arguments are not expanded. This must be done beforehand.
+
 This auxiliary macros were originally defined to handle font changes but can be used for other code as well.
 \par\bigskip\noindent
 \begin{tabularx}{\linewidth}{lX}
@@ -516,4 +522,5 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
 \end{tabularx}
 
 \end{document}
+
 
