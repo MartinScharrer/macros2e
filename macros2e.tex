@@ -7,6 +7,37 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 
+\usepackage{hyperref}
+\usepackage{zref-user}
+\usepackage{zref-abspos}
+\usepackage{zref-xr}
+\usepackage{graphicx}
+
+% Relative position of `source2e`
+\def\sourceIIe{source2e}
+
+\makeatletter
+\newcount\ZREF@xr@ignored
+
+\def\exthref#1#2{{%
+    \Gin@defaultbp\x{\zposx{ext-#1}sp}
+    \Gin@defaultbp\y{\zposy{ext-#1}sp}
+    \zrefused{ext-#1}
+    \edef\page{\zref@extract{ext-#1}{abspage}}%
+    \ifnum0\page=0\else
+        \href[page=\page,pdfnewwindow=true,%
+        pdfremotestartview=FitH \y]{file:\sourceIIe.pdf}{#2}%
+    \fi
+}}
+
+\zexternaldocument[ext-]{\sourceIIe}
+
+\let\origDescribeMacro\DescribeMacro
+\def\DescribeMacro#1{%
+  \llap{\expandafter\exthref\expandafter{\expandafter\@gobble\string#1}{LINK}~~~}%
+  \origDescribeMacro{#1}%
+}
+
 \title{List of internal \LaTeX2e Macros useful to Package Authors}
 \author{Compiled by Martin Scharrer\\\url{martin@scharrer-online.de}}
 \date{Version 0.2 -- February 9th 2011}
@@ -30,6 +61,8 @@ not yet sorted in the correct category.
 \section{Constants}
 
 \subsection{Number Constants}
+
+\exthref{@namedef}{Test \page,\x,\y}
 
 Some of the following integer values are defined using \Macro\countdef\relax (for $-1$),
 \Macro\chardef\relax (for values between 0--255) and \Macro\mathchardef\relax ($>255$).  They are
