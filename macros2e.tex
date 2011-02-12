@@ -58,7 +58,9 @@
         %\message{^^J No reference for: '\string#2'^^J}%
     \else
         % Otherwise set link to Fit Horizontally at the given y-coordinate
-        \href[{page=\page,pdfnewwindow=true,pdfremotestartview=FitH \y}]{file:\sourceIIe.pdf}{\llap{\tiny\page,\y\ }#2}%
+        \href[{page=\page,pdfnewwindow=true,pdfremotestartview=FitH \y}]{file:\sourceIIe.pdf}%
+            %{\llap{\tiny\page,\y\ }
+            {#2}%
     \fi
 }}
 
