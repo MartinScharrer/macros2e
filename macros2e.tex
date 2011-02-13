@@ -15,8 +15,9 @@
 \usepackage{zref-xr}
 \usepackage{graphicx}
 
-% Relative position of `source2e`
-\def\sourceIIe{source2e}
+% Relative position of `source2e` without extension
+\def\sourceIIe{/usr/local/texlive/2010/texmf-dist/doc/latex/base/source2e}
+%source2e}
 
 \makeatletter
 % Bug-fix for missing declaration:
@@ -33,6 +34,7 @@
     }}%
 }
 
+\iffalse
 
 \def\exthref#1#2{{%
     % Get page of 'desc-'iption label
@@ -64,165 +66,193 @@
     \fi
 }}
 
-\usepackage{filecontents}
-% The relevant part of the 'source2e' aux files.
-% Included here to allow the compilation of 'macros2e' without compiling 'source2e':
-\begin{filecontents}{source2e.aux}
-\zref@newlabel{code-@addtofilelist}{\posx{4238270}\posy{34901368}\abspage{75}}
-\zref@newlabel{code-addto@hook}{\posx{5476886}\posy{33123877}\abspage{131}}
-\zref@newlabel{code-@Alph}{\posx{7025156}\posy{16140091}\abspage{113}}
-\zref@newlabel{code-@alph}{\posx{7025156}\posy{21128801}\abspage{113}}
-\zref@newlabel{code-arraystretch}{\posx{4857578}\posy{37422995}\abspage{266}}
-\zref@newlabel{code-@arstrutbox}{\posx{5167232}\posy{35037485}\abspage{266}}
-\zref@newlabel{code-@backslashchar}{\posx{4238270}\posy{18977786}\abspage{37}}
-\zref@newlabel{code-@begin@tempboxa}{\posx{3928616}\posy{9993266}\abspage{241}}
-\zref@newlabel{code-bgroup}{\posx{6715502}\posy{15049007}\abspage{25}}
-\zref@newlabel{code-@break@tfor}{\posx{5167232}\posy{16753061}\abspage{45}}
-\zref@newlabel{code-@bsphack}{\posx{6096194}\posy{22257965}\abspage{60}}
-\zref@newlabel{code-@cclvi}{\posx{6715502}\posy{43371343}\abspage{20}}
-\zref@newlabel{code-@cclv}{\posx{7025156}\posy{45382660}\abspage{20}}
-\zref@newlabel{code-@charlb}{\posx{6405848}\posy{29257209}\abspage{73}}
-\zref@newlabel{code-@charrb}{\posx{6405848}\posy{28470777}\abspage{73}}
-\zref@newlabel{code-@classoptionslist}{\posx{3309308}\posy{48210219}\abspage{375}}
-\zref@newlabel{code-@clsextension}{\posx{4547924}\posy{34146195}\abspage{375}}
-\zref@newlabel{code-count@}{\posx{6715502}\posy{34827769}\abspage{21}}
-\zref@newlabel{code-@ctrerr}{\posx{6405848}\posy{14734431}\abspage{51}}
-\zref@newlabel{code-@currenvir}{\posx{5476886}\posy{44409131}\abspage{211}}
-\zref@newlabel{code-@currext}{\posx{6096194}\posy{36531705}\abspage{375}}
-\zref@newlabel{code-@currname}{\posx{5786540}\posy{38917215}\abspage{375}}
-\zref@newlabel{code-dimen@ii}{\posx{6096194}\posy{32468473}\abspage{21}}
-\zref@newlabel{code-dimen@i}{\posx{6405848}\posy{33254905}\abspage{21}}
-\zref@newlabel{code-dimen@}{\posx{6715502}\posy{34041337}\abspage{21}}
-\zref@newlabel{code-egroup}{\posx{6715502}\posy{14262575}\abspage{25}}
-\zref@newlabel{code-@empty}{\posx{6715502}\posy{38295707}\abspage{45}}
-\zref@newlabel{code-empty}{\posx{7025156}\posy{19820027}\abspage{25}}
-\zref@newlabel{code-end}{\posx{7644464}\posy{23608005}\abspage{213}}
-\zref@newlabel{code-@end@tempboxa}{\posx{4547924}\posy{46458406}\abspage{242}}
-\zref@newlabel{code-@Esphack}{\posx{6096194}\posy{12680632}\abspage{61}}
-\zref@newlabel{code-@esphack}{\posx{6096194}\posy{20051344}\abspage{61}}
-\zref@newlabel{code-@expandtwoargs}{\posx{4238270}\posy{22043481}\abspage{37}}
-\zref@newlabel{code-@filelist}{\posx{5786540}\posy{37940901}\abspage{75}}
-\zref@newlabel{code-@firstofone}{\posx{5167232}\posy{30519669}\abspage{37}}
-\zref@newlabel{code-@firstoftwo}{\posx{5167232}\posy{29733237}\abspage{37}}
-\zref@newlabel{code-@flushglue}{\posx{5476886}\posy{9262445}\abspage{42}}
-\zref@newlabel{code-@for}{\posx{7334810}\posy{33758110}\abspage{45}}
-\zref@newlabel{code-g@addto@macro}{\posx{4547924}\posy{25950831}\abspage{383}}
-\zref@newlabel{code-GenericError}{\posx{4857578}\posy{18832350}\abspage{46}}
-\zref@newlabel{code-GenericInfo}{\posx{5167232}\posy{34364382}\abspage{46}}
-\zref@newlabel{code-@gobblefour}{\posx{5167232}\posy{32733396}\abspage{37}}
-\zref@newlabel{code-@gobble}{\posx{6405848}\posy{34306260}\abspage{37}}
-\zref@newlabel{code-@gobbletwo}{\posx{5476886}\posy{33519828}\abspage{37}}
-\zref@newlabel{code-hexnumber@}{\posx{5476886}\posy{37593387}\abspage{178}}
-\zref@newlabel{code-hideskip}{\posx{6096194}\posy{29805034}\abspage{22}}
-\zref@newlabel{code-@iden}{\posx{7025156}\posy{26733078}\abspage{37}}
-\zref@newlabel{code-@ifclasslater}{\posx{4547924}\posy{40581829}\abspage{376}}
-\zref@newlabel{code-@ifclassloaded}{\posx{4238270}\posy{50503979}\abspage{376}}
-\zref@newlabel{code-@iffileonpath}{\posx{4547924}\posy{9868297}\abspage{73}}
-\zref@newlabel{code-if@filesw}{\posx{5786540}\posy{51290411}\abspage{70}}
-\zref@newlabel{code-ifin@}{\posx{7025156}\posy{39042468}\abspage{157}}
-\zref@newlabel{code-ifnot@nil}{\posx{5786540}\posy{36415564}\abspage{143}}
-\zref@newlabel{code-@ifpackagelater}{\posx{3928616}\posy{41368261}\abspage{376}}
-\zref@newlabel{code-@ifpackageloaded}{\posx{3618962}\posy{51290411}\abspage{376}}
-\zref@newlabel{code-if@partsw}{\posx{5786540}\posy{50503979}\abspage{70}}
-\zref@newlabel{code-if@tempswa}{\posx{5476886}\posy{22906960}\abspage{42}}
-\zref@newlabel{code-in@}{\posx{7644464}\posy{39828900}\abspage{157}}
-\zref@newlabel{code-iterate}{\posx{6405848}\posy{50503979}\abspage{26}}
-\zref@newlabel{code-@ixpt}{\posx{7025156}\posy{21577710}\abspage{131}}
-\zref@newlabel{code-l@ngrel@x}{\posx{5786540}\posy{9583303}\abspage{32}}
-\zref@newlabel{code-loop}{\posx{7334810}\posy{51290411}\abspage{26}}
-\zref@newlabel{code-@makeother}{\posx{5476886}\posy{37501637}\abspage{216}}
-\zref@newlabel{code-maxdimen}{\posx{6096194}\posy{30591466}\abspage{22}}
-\zref@newlabel{code-MessageBreak}{\posx{4857578}\posy{38820830}\abspage{46}}
-\zref@newlabel{code-@Miii}{\posx{7025156}\posy{29333376}\abspage{42}}
-\zref@newlabel{code-@Mii}{\posx{7334810}\posy{30119808}\abspage{42}}
-\zref@newlabel{code-@Mi}{\posx{7644464}\posy{30906240}\abspage{42}}
-\zref@newlabel{code-@miv}{\posx{7334810}\posy{28546944}\abspage{42}}
-\zref@newlabel{code-@MM}{\posx{7644464}\posy{41012047}\abspage{20}}
-\zref@newlabel{code-m@ne}{\posx{7334810}\posy{39598789}\abspage{21}}
-\zref@newlabel{code-@M}{\posx{7954118}\posy{41798479}\abspage{20}}
-\zref@newlabel{code-@m}{\posx{7954118}\posy{42584911}\abspage{20}}
-\zref@newlabel{code-@ne}{\posx{7644464}\posy{48528388}\abspage{20}}
-\zref@newlabel{code-@nnil}{\posx{7025156}\posy{40564505}\abspage{45}}
-\zref@newlabel{code-null}{\posx{7334810}\posy{17434517}\abspage{25}}
-\zref@newlabel{code-@obsoletefile}{\posx{4547924}\posy{44898377}\abspage{75}}
-\zref@newlabel{code-@onelevel@sanitize}{\posx{2999654}\posy{35705951}\abspage{41}}
-\zref@newlabel{code-@onlypreamble}{\posx{4547924}\posy{22297287}\abspage{32}}
-\zref@newlabel{code-@pkgextension}{\posx{4547924}\posy{33359763}\abspage{375}}
-\zref@newlabel{code-p@}{\posx{7954118}\posy{27536597}\abspage{22}}
-\zref@newlabel{code-@protected@testopt}{\posx{2999654}\posy{8960348}\abspage{33}}
-\zref@newlabel{code-@ptionlist}{\posx{5476886}\posy{11641133}\abspage{375}}
-\zref@newlabel{code-remove@star}{\posx{5167232}\posy{28813388}\abspage{143}}
-\zref@newlabel{code-remove@to@nnil}{\posx{4238270}\posy{30386252}\abspage{143}}
-\zref@newlabel{code-rem@pt}{\posx{6715502}\posy{26450904}\abspage{122}}
-\zref@newlabel{code-repeat}{\posx{6715502}\posy{49717547}\abspage{26}}
-\zref@newlabel{code-@sanitize}{\posx{5786540}\posy{41210975}\abspage{41}}
-\zref@newlabel{code-@secondoftwo}{\posx{4857578}\posy{28946805}\abspage{37}}
-\zref@newlabel{code-@settopoint}{\posx{5167232}\posy{25440291}\abspage{114}}
-\zref@newlabel{code-sixt@@n}{\posx{6405848}\posy{46169092}\abspage{20}}
-\zref@newlabel{code-skip@}{\posx{7025156}\posy{31682041}\abspage{21}}
-\zref@newlabel{code-space}{\posx{7025156}\posy{22205537}\abspage{25}}
-\zref@newlabel{code-@spaces}{\posx{6405848}\posy{15350469}\abspage{50}}
-\zref@newlabel{code-@sptoken}{\posx{6096194}\posy{14075249}\abspage{40}}
-\zref@newlabel{code-@star@or@long}{\posx{4547924}\posy{14826183}\abspage{32}}
-\zref@newlabel{code-@starttoc}{\posx{5786540}\posy{18641297}\abspage{296}}
-\zref@newlabel{code-strip@prefix}{\posx{4857578}\posy{23450605}\abspage{11}}
-\zref@newlabel{code-strip@pt}{\posx{6096194}\posy{27237336}\abspage{122}}
-\zref@newlabel{code-strutbox}{\posx{6096194}\posy{48302198}\abspage{27}}
-\zref@newlabel{code-@tempboxa}{\posx{5786540}\posy{16872437}\abspage{42}}
-\zref@newlabel{code-@tempcnta}{\posx{5786540}\posy{25924221}\abspage{42}}
-\zref@newlabel{code-@tempcntb}{\posx{5786540}\posy{25137789}\abspage{42}}
-\zref@newlabel{code-@tempdima}{\posx{5786540}\posy{20610595}\abspage{42}}
-\zref@newlabel{code-@tempdimb}{\posx{5786540}\posy{19824163}\abspage{42}}
-\zref@newlabel{code-@tempdimc}{\posx{5786540}\posy{19037731}\abspage{42}}
-\zref@newlabel{code-@tempskipa}{\posx{5476886}\posy{14576072}\abspage{42}}
-\zref@newlabel{code-@tempskipb}{\posx{5476886}\posy{13789640}\abspage{42}}
-\zref@newlabel{code-@temptokena}{\posx{5167232}\posy{11558810}\abspage{42}}
-\zref@newlabel{code-@testopt}{\posx{6096194}\posy{16635766}\abspage{33}}
-\zref@newlabel{code-@tfor}{\posx{7025156}\posy{22626339}\abspage{45}}
-\zref@newlabel{code-@thirdofthree}{\posx{4547924}\posy{24388280}\abspage{37}}
-\zref@newlabel{code-thr@@}{\posx{7025156}\posy{46955524}\abspage{20}}
-\zref@newlabel{code-toks@}{\posx{7025156}\posy{30895609}\abspage{21}}
-\zref@newlabel{code-tw@}{\posx{7644464}\posy{47741956}\abspage{20}}
-\zref@newlabel{code-@unusedoptionlist}{\posx{3309308}\posy{45103813}\abspage{375}}
-\zref@newlabel{code-@vbsphack}{\posx{5786540}\posy{48472363}\abspage{62}}
-\zref@newlabel{code-@viiipt}{\posx{6405848}\posy{23886943}\abspage{131}}
-\zref@newlabel{code-@viipt}{\posx{6715502}\posy{26196177}\abspage{131}}
-\zref@newlabel{code-@vipt}{\posx{7025156}\posy{28505410}\abspage{131}}
-\zref@newlabel{code-voidb@x}{\posx{6405848}\posy{25177301}\abspage{22}}
-\zref@newlabel{code-@vpt}{\posx{7334810}\posy{30814644}\abspage{131}}
-\zref@newlabel{code-@whiledim}{\posx{5786540}\posy{33569477}\abspage{44}}
-\zref@newlabel{code-@whilenum}{\posx{5786540}\posy{37331243}\abspage{44}}
-\zref@newlabel{code-@whilesw}{\posx{6096194}\posy{28955743}\abspage{44}}
-\zref@newlabel{code-wlog}{\posx{7334810}\posy{37213279}\abspage{21}}
-\zref@newlabel{code-@writefile}{\posx{5476886}\posy{29581431}\abspage{212}}
-\zref@newlabel{code-@xiipt}{\posx{6715502}\posy{14650009}\abspage{131}}
-\zref@newlabel{code-@xipt}{\posx{7025156}\posy{16959243}\abspage{131}}
-\zref@newlabel{code-@xivpt}{\posx{6715502}\posy{12340776}\abspage{131}}
-\zref@newlabel{code-@xpt}{\posx{7334810}\posy{19268476}\abspage{131}}
-\zref@newlabel{code-@xviipt}{\posx{6405848}\posy{10031542}\abspage{131}}
-\zref@newlabel{code-@xxpt}{\posx{7025156}\posy{7722309}\abspage{131}}
-\zref@newlabel{code-@xxvpt}{\posx{6715502}\posy{51290411}\abspage{132}}
-\zref@newlabel{code-@xxxii}{\posx{6715502}\posy{33202606}\abspage{42}}
-\zref@newlabel{code-zap@space}{\posx{5786540}\posy{42049835}\abspage{381}}
-\zref@newlabel{code-z@}{\posx{7954118}\posy{26750165}\abspage{22}}
-\zref@newlabel{code-z@skip}{\posx{6715502}\posy{25963733}\abspage{22}}
-\zref@newlabel{desc-@dblarg}{\posx{9520414}\posy{25170955}\abspage{31}}
-\zref@newlabel{desc-filename@parse}{\posx{9520414}\posy{18058841}\abspage{12}}
-\zref@newlabel{desc-@ifdefinable}{\posx{9520414}\posy{20488772}\abspage{31}}
-\zref@newlabel{desc-@ifnextchar}{\posx{9520414}\posy{30675979}\abspage{31}}
-\zref@newlabel{desc-@ifstar}{\posx{9520414}\posy{27694091}\abspage{31}}
-\zref@newlabel{desc-@ifundefined}{\posx{9520414}\posy{22848068}\abspage{31}}
-\zref@newlabel{desc-input@path}{\posx{9520414}\posy{30659958}\abspage{12}}
-\zref@newlabel{desc-input}{\posx{9520414}\posy{26334582}\abspage{374}}
-\zref@newlabel{desc-@namedef}{\posx{9520414}\posy{33858116}\abspage{31}}
-\zref@newlabel{desc-@nameuse}{\posx{9520414}\posy{32248843}\abspage{31}}
-\zref@newlabel{desc-@@par}{\posx{9520414}\posy{25506176}\abspage{54}}
-\zref@newlabel{desc-@restorepar}{\posx{9520414}\posy{27060836}\abspage{54}}
-\zref@newlabel{desc-@setpar}{\posx{9520414}\posy{30606086}\abspage{54}}
-\end{filecontents}
+\def\siieposs#1#2#3#4\relax{%
+    \Gin@defaultbp\x{#1sp}%
+    \Gin@defaultbp\y{#2sp}%
+    \def\p{#3}%
+}
+\def\siiepos#1#2{%
+   \siieposs#2\relax
+   \message{^^J\noexpand\siiepos{#1}{\x}{\y}{\p}}
+}
+
+\else
+
+\def\siiepos#1#2#3#4{%
+   \@namedef{siiepos@#1@x}{#2}%
+   \@namedef{siiepos@#1@y}{#3}%
+   \@namedef{siiepos@#1@p}{#4}%
+}
+
+\def\exthref#1#2{%
+    \@ifundefined{siiepos@#1@p}{%
+        % Simply typeset the text if no label is found
+        #2%
+        %\message{^^J No reference for: '\string#2'^^J}%
+    }{%
+        % Otherwise set link to Fit Horizontally at the given y-coordinate
+        \href[page=\@nameuse{siiepos@#1@p},pdfnewwindow=true,pdfremotestartview=FitH \@nameuse{siiepos@#1@y}]{file:\sourceIIe.pdf}%
+            {#2}%
+    }%
+}
+
+\fi
+
+
+\siiepos{@addtofilelist}{64.4291}{530.5617}{75}
+\siiepos{addto@hook}{83.25822}{503.54074}{131}
+\siiepos{@Alph}{106.79463}{245.35754}{113}
+\siiepos{@alph}{106.79463}{321.19466}{113}
+\siiepos{arraystretch}{73.84366}{568.89484}{266}
+\siiepos{@arstrutbox}{78.55093}{532.63092}{266}
+\siiepos{@backslashchar}{64.4291}{288.49547}{37}
+\siiepos{@begin@tempboxa}{59.72182}{151.91508}{241}
+\siiepos{bgroup}{102.08734}{228.77116}{25}
+\siiepos{@break@tfor}{78.55093}{254.67577}{45}
+\siiepos{@bsphack}{92.67278}{338.35991}{60}
+\siiepos{@cclvi}{102.08734}{659.32011}{20}
+\siiepos{@cclv}{106.79463}{689.89565}{20}
+\siiepos{@charlb}{97.38007}{444.76064}{73}
+\siiepos{@charrb}{97.38007}{432.8055}{73}
+\siiepos{@classoptionslist}{50.30725}{732.87947}{375}
+\siiepos{@clsextension}{69.13638}{519.08176}{375}
+\siiepos{count@}{102.08734}{529.44287}{21}
+\siiepos{@ctrerr}{97.38007}{223.98906}{51}
+\siiepos{@currenvir}{83.25822}{675.0963}{211}
+\siiepos{@currext}{92.67278}{555.34567}{375}
+\siiepos{@currname}{87.9655}{591.60959}{375}
+\siiepos{dimen@ii}{92.67278}{493.57745}{21}
+\siiepos{dimen@i}{97.38007}{505.5326}{21}
+\siiepos{dimen@}{102.08734}{517.48773}{21}
+\siiepos{egroup}{102.08734}{216.81602}{25}
+\siiepos{@empty}{102.08734}{582.16159}{45}
+\siiepos{empty}{106.79463}{301.299}{25}
+\siiepos{end}{116.20918}{358.88287}{213}
+\siiepos{@end@tempboxa}{69.13638}{706.24886}{242}
+\siiepos{@Esphack}{92.67278}{192.76773}{61}
+\siiepos{@esphack}{92.67278}{304.81541}{61}
+\siiepos{@expandtwoargs}{64.4291}{335.09938}{37}
+\siiepos{@filelist}{87.9655}{576.76791}{75}
+\siiepos{@firstofone}{78.55093}{463.95224}{37}
+\siiepos{@firstoftwo}{78.55093}{451.9971}{37}
+\siiepos{@flushglue}{83.25822}{140.80533}{42}
+\siiepos{@for}{111.5019}{513.18219}{45}
+\siiepos{g@addto@macro}{69.13638}{394.49792}{383}
+\siiepos{GenericError}{73.84366}{286.28459}{46}
+\siiepos{GenericInfo}{78.55093}{522.39859}{46}
+\siiepos{@gobblefour}{78.55093}{497.60475}{37}
+\siiepos{@gobble}{97.38007}{521.51503}{37}
+\siiepos{@gobbletwo}{83.25822}{509.55989}{37}
+\siiepos{hexnumber@}{83.25822}{571.48509}{178}
+\siiepos{hideskip}{92.67278}{453.08853}{22}
+\siiepos{@iden}{106.79463}{406.38943}{37}
+\siiepos{@ifclasslater}{69.13638}{616.91463}{376}
+\siiepos{@ifclassloaded}{64.4291}{767.74863}{376}
+\siiepos{@iffileonpath}{69.13638}{150.01534}{73}
+\siiepos{if@filesw}{87.9655}{779.70377}{70}
+\siiepos{ifin@}{106.79463}{593.51366}{157}
+\siiepos{ifnot@nil}{87.9655}{553.58012}{143}
+\siiepos{@ifpackagelater}{59.72182}{628.86977}{376}
+\siiepos{@ifpackageloaded}{55.01453}{779.70377}{376}
+\siiepos{if@partsw}{87.9655}{767.74863}{70}
+\siiepos{if@tempswa}{83.25822}{348.22577}{42}
+\siiepos{in@}{116.20918}{605.4688}{157}
+\siiepos{iterate}{97.38007}{767.74863}{26}
+\siiepos{@ixpt}{106.79463}{328.01884}{131}
+\siiepos{l@ngrel@x}{87.9655}{145.68292}{32}
+\siiepos{loop}{111.5019}{779.70377}{26}
+\siiepos{@makeother}{83.25822}{570.09033}{216}
+\siiepos{maxdimen}{92.67278}{465.04367}{22}
+\siiepos{MessageBreak}{73.84366}{590.14438}{46}
+\siiepos{@Miii}{106.79463}{445.91852}{42}
+\siiepos{@Mii}{111.5019}{457.87366}{42}
+\siiepos{@Mi}{116.20918}{469.8288}{42}
+\siiepos{@Miv}{111.5019}{433.96338}{42}
+\siiepos{@MM}{116.20918}{623.4547}{20}
+\siiepos{m@ne}{111.5019}{601.9707}{21}
+\siiepos{@M}{120.91647}{635.40984}{20}
+\siiepos{@m}{120.91647}{647.36497}{20}
+\siiepos{@ne}{116.20918}{737.7162}{20}
+\siiepos{@nnil}{106.79463}{616.65128}{45}
+\siiepos{null}{111.5019}{265.03508}{25}
+\siiepos{@obsoletefile}{69.13638}{682.53369}{75}
+\siiepos{@onelevel@sanitize}{45.59998}{542.79277}{41}
+\siiepos{@onlypreamble}{69.13638}{338.95767}{32}
+\siiepos{@pkgextension}{69.13638}{507.12662}{375}
+\siiepos{p@}{120.91647}{418.60434}{22}
+\siiepos{@protected@testopt}{45.59998}{136.21292}{33}
+\siiepos{@ptionlist}{83.25822}{176.96553}{375}
+\siiepos{remove@star}{78.55093}{438.01378}{143}
+\siiepos{remove@to@nnil}{64.4291}{461.92406}{143}
+\siiepos{rem@pt}{102.08734}{402.0999}{122}
+\siiepos{repeat}{102.08734}{755.79349}{26}
+\siiepos{@sanitize}{87.9655}{626.47874}{41}
+\siiepos{@secondoftwo}{73.84366}{440.04196}{37}
+\siiepos{@settopoint}{78.55093}{386.73682}{114}
+\siiepos{sixt@@n}{97.38007}{701.85078}{20}
+\siiepos{skip@}{106.79463}{481.62231}{21}
+\siiepos{space}{106.79463}{337.56291}{25}
+\siiepos{@spaces}{97.38007}{233.35391}{50}
+\siiepos{@sptoken}{92.67278}{213.96835}{40}
+\siiepos{@star@or@long}{69.13638}{225.38385}{32}
+\siiepos{@starttoc}{87.9655}{283.38025}{296}
+\siiepos{strip@prefix}{73.84366}{356.49013}{11}
+\siiepos{strip@pt}{92.67278}{414.05504}{122}
+\siiepos{strutbox}{92.67278}{734.27771}{27}
+\siiepos{@tempboxa}{87.9655}{256.4905}{42}
+\siiepos{@tempcnta}{87.9655}{394.0934}{42}
+\siiepos{@tempcntb}{87.9655}{382.13826}{42}
+\siiepos{@tempdima}{87.9655}{313.31702}{42}
+\siiepos{@tempdimb}{87.9655}{301.36188}{42}
+\siiepos{@tempdimc}{87.9655}{289.40674}{42}
+\siiepos{@tempskipa}{83.25822}{221.58173}{42}
+\siiepos{@tempskipb}{83.25822}{209.62659}{42}
+\siiepos{@temptokena}{78.55093}{175.71408}{42}
+\siiepos{@testopt}{92.67278}{252.89267}{33}
+\siiepos{@tfor}{106.79463}{343.95984}{45}
+\siiepos{@thirdofthree}{69.13638}{370.74442}{37}
+\siiepos{thr@@}{106.79463}{713.80592}{20}
+\siiepos{toks@}{106.79463}{469.66718}{21}
+\siiepos{tw@}{116.20918}{725.76106}{20}
+\siiepos{@unusedoptionlist}{50.30725}{685.65668}{375}
+\siiepos{@vbsphack}{87.9655}{736.86452}{62}
+\siiepos{@viiipt}{97.38007}{363.12321}{131}
+\siiepos{@viipt}{102.08734}{398.22762}{131}
+\siiepos{@vipt}{106.79463}{433.33199}{131}
+\siiepos{voidb@x}{97.38007}{382.73892}{22}
+\siiepos{@vpt}{111.5019}{468.43637}{131}
+\siiepos{@whiledim}{87.9655}{510.31464}{44}
+\siiepos{@whilenum}{87.9655}{567.50005}{44}
+\siiepos{@whilesw}{92.67278}{440.17783}{44}
+\siiepos{wlog}{111.5019}{565.70679}{21}
+\siiepos{@writefile}{83.25822}{449.68938}{212}
+\siiepos{@xiipt}{102.08734}{222.7057}{131}
+\siiepos{@xipt}{106.79463}{257.81009}{131}
+\siiepos{@xivpt}{102.08734}{187.60133}{131}
+\siiepos{@xpt}{111.5019}{292.91446}{131}
+\siiepos{@xviipt}{97.38007}{152.49695}{131}
+\siiepos{@xxpt}{106.79463}{117.39256}{131}
+\siiepos{@xxvpt}{102.08734}{779.70377}{132}
+\siiepos{@xxxii}{102.08734}{504.73756}{42}
+\siiepos{zap@space}{87.9655}{639.23088}{381}
+\siiepos{z@}{120.91647}{406.6492}{22}
+\siiepos{z@skip}{102.08734}{394.69406}{22}
+\siiepos{@dblarg}{144.7269}{382.64244}{31}
+\siiepos{filename@parse}{144.7269}{274.5259}{12}
+\siiepos{@ifdefinable}{144.7269}{311.46509}{31}
+\siiepos{@ifnextchar}{144.7269}{466.32841}{31}
+\siiepos{@ifstar}{144.7269}{420.99852}{31}
+\siiepos{@ifundefined}{144.7269}{347.3305}{31}
+\siiepos{input@path}{144.7269}{466.08487}{12}
+\siiepos{input}{144.7269}{400.3316}{374}
+\siiepos{@namedef}{144.7269}{514.70245}{31}
+\siiepos{@nameuse}{144.7269}{490.2387}{31}
+\siiepos{@@par}{144.7269}{387.73839}{54}
+\siiepos{@restorepar}{144.7269}{411.37193}{54}
+\siiepos{@setpar}{144.7269}{465.26593}{54}
 
 % Load the external references
-\zexternaldocument{\sourceIIe}
+%\zexternaldocument{\sourceIIe}
 
 \title{List of internal \LaTeX2e Macros useful to Package Authors}
 \author{Compiled by Martin Scharrer\\\url{martin@scharrer-online.de}}
@@ -282,7 +312,7 @@ following tokens until a non-numeric token is found.%, e.g.\ a space or |\relax|
    \Macro\@Mi      & 10001 & mathchardef \\
    \Macro\@Mii     & 10002 & mathchardef \\
    \Macro\@Miii    & 10003 & mathchardef \\
-   \Macro\@miv     & 10004 & mathchardef \\
+   \Macro\@Miv     & 10004 & mathchardef \\
    \Macro\@MM      & 20000 & mathchardef \\
   \bottomrule
 \end{tabular}
@@ -355,6 +385,11 @@ This makes them useful if such characters are to be written into an auxiliary fi
     \Macro\@charrb        & ``\texttt{\@charrb}''        & Right brace with catcode 11 (letter). \\
     \Macro\@clsextension  & ``\texttt{cls}''             & Used for comparison with \Macro\@currext. \\
     \Macro\@pkgextension  & ``\texttt{sty}''             & Used for comparison with \Macro\@currext. \\
+    \Macro\@depth         & ``\texttt{depth}''           & Used for box size declarations (\Macro\hb@xt@).\\
+    \Macro\@height        & ``\texttt{height}''          & Used for box size declarations.\\
+    \Macro\@width         & ``\texttt{width}''           & Used for box size declarations.\\
+    \Macro\@minus         & ``\texttt{minus}''           & Used for skip declarations.\\
+    \Macro\@plus          & ``\texttt{plus}''            & Used for skip declarations.\\
   \bottomrule
 \end{tabularx}
 
@@ -542,6 +577,22 @@ NOTES:\par\vspace{-1ex}
 looks syntactically to TeX like an improperly balanced |\if \else \fi|.
 \end{enumerate}
 
+\subsection{Colors}
+The following macros are defined equal to |\relax| by LaTeX2e as placeholder for the
+real code added by the \pkg{color} or \pkg{xcolor} package.
+They are needed to handle colors inside saved boxes correctly.
+See the definitions of \Macro\sbox for an example.
+
+\begin{tabular}{ll}
+  Macro & Definition given by \pkg{color} \\
+  \Macro\color@begingroup & \Macro\begingroup \\
+  \Macro\color@endgroup   & \Macro\endgroup \\
+  \Macro\color@setgroup   & \Macro\begingroup\set@color \\
+  \Macro\color@hbox       & \hbox\bgroup\color@begingroup \\
+  \Macro\color@vbox       & \vbox\bgroup\color@begingroup \\
+  \Macro\color@endbox     & \color@endgroup\egroup \\
+\end{tabular}
+
 \subsection{Auxiliary Macros}
 
 \DescribeMacro\in@{<1>}{<2>}
@@ -610,6 +661,11 @@ Write on log file only.
  \bottomrule
 \end{tabularx}
 
+\DescribeMacro\@defaultunits
+\noindent
+Used to provide a default unit for |dimen| or |skip| assignment. Usage: |\@defaultunits\dimen=#1pt\relax\@nnil|.
+Other units can be used instead of `|pt|'.
+
 
 \subsection{File related Macros}
 
@@ -619,6 +675,7 @@ Write on log file only.
    \midrule
    \Macro\if@filesw & If false the package should not be produce or write to output files. Set to false by \cs{nofiles}.\\
    \Macro\if@partsw & \\
+   \Macro\@currdir  & Holds the current directory, e.g. `|./|' in an Unix OS. \\
    \Macro\input@path & List of input paths. Each path should be enclosed in braces with no delimiters between paths. \\
    \Macro\@filelist & The comma separated list of all files read so far. Only active if \cs{listfiles} is used in the preamble. \\
    \Macro\@classoptionslist & List of options of the main class. \\
@@ -631,6 +688,9 @@ Write on log file only.
 Parses \meta{filename} and provides its directory, name base and extension in \Macro\filename@area,
 \Macro\filename@base and \Macro\filename@ext. The latter is let to \Macro\relax if it does not
 exists.
+
+\DescribeMacro\@filef@und
+The macro \Macro\IfFileExists (which is used by \Macro\InputIfFileExists) stores the found file followed by a space in this macro.
 
 \DescribeMacro\@starttoc{<ext>}
 \noindent
@@ -659,20 +719,26 @@ Adds the given filename to the list of files. Only active if \cs{listfiles} is u
 Expands the option list of package, class or file given by full filename. 
 
 \DescribeMacro\@ifpackageloaded{<package>}{<true>}{<false>}
-\noindent
-Tests if given package has been loaded.
-
 \DescribeMacro\@ifclassloaded{<class>}{<true>}{<false>}
-\noindent
-Tests if given class has been loaded.
+\DescribeMacro\@ifl@aded{<extension>}{<file base>}{<true>}{<false>}
+Tests if given package/class/file has been loaded.
 
-\DescribeMacro\@ifpackagelater{<package>}{<version>}{<true>}{<false>}
-\noindent
-Tests if given package has been loaded with a version more recent than \meta{version}.
 
-\DescribeMacro\@ifclasslater{<class>}{<version>}{<true>}{<false>}
+\DescribeMacros
+\Macro\@ifpackagewith{<name>}{<option-list>}{<true>}{<false>}
+\Macro\@ifclasswith{<name>}{<option-list>}{<true>}{<false>}
+\Macro\@if@ptions{<extension>}{<name>}{<option-list>}{<true>}{<false>}
+\endDescribeMacros
 \noindent
-Tests if given class has been loaded with a version more recent than \meta{version}.
+Tests if given package/class/file has been loaded with the given options.
+
+\DescribeMacros
+\Macro\@ifpackagelater{<name>}{<date YYYY/MM/DD>}{<true>}{<false>}
+\Macro\@ifclasslater{<name>}{<date YYYY/MM/DD>}{<true>}{<false>}
+\Macro\@ifl@ter{<extension>}{<file base>}{<date YYYY/MM/DD>}{<true>}{<false>}
+\endDescribeMacros
+\noindent
+Tests if given package/class/file has been loaded with a version more recent than \meta{version}.
 
 
 \subsection{Saved plain\TeX{} primitives}
@@ -681,11 +747,14 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
 \par\bigskip\noindent
 \begin{tabular}{lll}
    \toprule
-   \LaTeX{} Macro & plain\TeX{} original & Description/Note \\
+   \LaTeX{} Macro             & plain\TeX{} original & Description/Note \\
    \midrule
-   \Macro\@@par   & \Macro{par}   & Some \LaTeX{} environments redefine \Macro{par} locally \\
-   \Macro\@@input & \Macro\input  & Syntax: \Macro\input~<filename> \\
-   \Macro\@@end   & \Macro\end    &  \\
+   \Macro\@@par               & \Macro{par}          & Some \LaTeX{} environments redefine \Macro{par} locally \\
+   \Macro\@@input             & \Macro\input         & Syntax: \Macro\input~<filename> \\
+   \Macro\@@end               & \Macro\end           & \\
+   \Macro\@@underline         & \Macro\underline     & \\
+   \Macro\frozen@everymath    & \Macro\everymath     & \\
+   \Macro\frozen@everydisplay & \Macro\everydisplay  & \\
    \bottomrule
 \end{tabular}
 
@@ -738,6 +807,42 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
      \Macro\@Alph{<number>} & Expands to upper case letter corresponding to the given number (1=A, 2=B, \ldots). Expands to \Macro\@ctrerr if number is larger then~26.\\
    \bottomrule
 \end{tabularx}
+
+\subsubsection{To be sorted}
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
+\Macro\@currentlabel  &  The value a \Macro\label will point to. Set by \Macro\stepcounter and \Macro\refstepcounter. \\
+\Macro\@declaredoptions & Comma separated list of the options declared by the current package or class.
+The list is in the order in which the options were declared. \\
+\if@compatibility & Switch to indicate if the LaTeX2.09 compatibility mode is active. \\
+\@classoptionslist & List of options of the main class. \\
+   \bottomrule
+\end{tabularx}
+
+\Macro\@currsize & Let to the last font size command (e.g.\ |\small|) \\
+\Macro\@gobblecr & Gobbles a following carriage return, ignores spaces otherwise \\
+\Macro\hb@xt@    & |\hbox to| \\
+\Macro\hmode@bgroup & |\leavevmode\bgroup| \\
+
+\DescribeMacros
+ \Macro\f@encoding
+ \Macro\f@family
+ \Macro\f@series
+ \Macro\f@shape
+ \Macro\f@size
+\endDescribeMacros
+Hold the current font encoding, family, series, shape and size (in pt but without unit).
+
+\Macro\if@ignore     Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.
+
+\Macro\@inputcheck   Input file handle to check for the existence of the file.
+\Macro\@mainaux      Output file handle for the main |aux| file.
+\Macro\@partaux      Output file handle for include file |aux| files.
+\Macro\@auxout       Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.
+
+% ToDo Check footnote makros
 
 \end{document}
 
