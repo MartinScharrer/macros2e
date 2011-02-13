@@ -467,11 +467,15 @@ code. Care must also be taken if they are used together with external macros, wh
    \toprule
    Macro & Description \\
    \midrule
+   \Macro\@currenvir & Name of the current environment. \\
    \Macro\@currext   & Extension of the current package or class file, empty outside. \\
    \Macro\@currname  & File name base of the current package or class file, empty outside. \\
-   \Macro\@currenvir & Name of the current environment. \\
    \bottomrule
 \end{tabularx}
+
+ %\Macro\@pushfilename & pushes file name, extension and current catcode of `|@|' onto the file stack. \\
+ %\Macro\@popfilename  & pushes file name, extension and current catcode of `|@|' onto the file stack. \\
+ %\Macro\@currnamestack & file name stack.\\
 
 
 \clearpage
@@ -838,9 +842,38 @@ Hold the current font encoding, family, series, shape and size (in pt but withou
 \Macro\if@ignore     Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.
 
 \Macro\@inputcheck   Input file handle to check for the existence of the file.
+\Macro\@unused       Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.
 \Macro\@mainaux      Output file handle for the main |aux| file.
 \Macro\@partaux      Output file handle for include file |aux| files.
 \Macro\@auxout       Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.
+
+\Macro\@settodim{<dimension macro>}{<length register>}{<content>}
+
+\Macro\two@digits{<number>}
+Returns \meta{number} (e.g.\ a |count| register) as string and ensures that it has at least two digits 
+by appending a `|0|' if required.
+
+\Macro\@currenvline  & Line number of the begin of the current environment \\
+
+\Macro\if@minipage  & True for a |minipage|, false for a |parbox|. Responsible for adding space, skips and paragraph indents for a |parbox|.\\
+
+\Macro\@wholewidth
+\Macro\@halfwidth
+This |dimen| registers hold the full and half line width (thickness) in \env{picture} environments.
+
+\Macro\@killglue
+Removes (|\unskip|s) the last and then all further skips (|\lastskip|) till one with a size of zero is reached.
+
+\Macro\@partlist
+Holds the comma-separated list defined by \Macro\includeonly.
+
+\Macro\if@twoside     & True for two-sided documents \\
+\Macro\if@twocolumn   & Indicates if two-column mode is active \\
+\Macro\if@firstcolumn & Indicates if the first column is processed \\
+
+\Macro\@removeelement{<element>}{<list>}{<cs>}
+Removes an element from a comma-separated list and puts it into a control sequence.
+
 
 % ToDo Check footnote makros
 
