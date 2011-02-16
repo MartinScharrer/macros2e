@@ -2,7 +2,15 @@
 % $Id$
 \documentclass[12pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{ydoc}
+\usepackage{ydoc-desc}[2010/02/16]
+\usepackage{newverbs}
+\MakeShortVerb\|
+\def\q#1{`#1'}
+\def\qq#1{``#1''}
+\MakeSpecialShortVerb\qverb\"
+\AtBeginDocument{\MakeShortMacroArgs*\`}
+\AtEndDocument{\DeleteShortMacroArgs\`}
+
 \usepackage{hyperref}
 \usepackage{xcolor}
 \hypersetup{filecolor=macrodesc}
@@ -263,7 +271,7 @@
 \maketitle
 \begin{abstract}
 This document lists the internal macros defined by the \LaTeX2e base files which can be also useful
-to package authors.  The macros are hyper-linked to their description in `source2e'.
+to package authors.  The macros are hyper-linked to their description in \emph{source2e}.
 For this to work both PDFs must be inside the same directory.
 
 This document is not yet complete in content and format and may miss some macros. Several macros are
@@ -279,10 +287,10 @@ not yet sorted in the correct category.
 
 \subsection{Number Constants}
 
-Some of the following integer values are defined using \Macro\countdef\relax (for $-1$),
-\Macro\chardef\relax (for values between 0--255) and \Macro\mathchardef\relax ($>255$).  They are
-robust and do not expand in an \Macro\edef\relax context. When used on the right side of an
-assignment the act the same way as a count register.  The |\m@ne| is a real count register and can
+Some of the following integer values are defined using `\countdef` (for $-1$),
+`\chardef` (for values between 0--255) and `\mathchardef` ($>255$).  They are
+robust and do not expand in an `\edef` context. When used on the right side of an
+assignment the act the same way as a count register.  The `\m@ne` is a real count register and can
 still be modified, but doing so would certainly break various code.  In the terms defined by
 \emph{The TeXbook}, this integer constants yield \emph{internal integers} rather than \emph{integer
 denotations}.
@@ -348,7 +356,7 @@ The following dimension and skip constants are defined using registers. They mus
   \toprule
     Macro           & Value         & Defined using & Notes \\
   \midrule
-    \Macro\p@       & 1pt           & newdimen      & Can be used as a replacement of `|pt|' behind a number due to the resulting multiplication \\
+    \Macro\p@       & 1pt           & newdimen      & Can be used as a replacement of pt behind a number due to the resulting multiplication \\
     \Macro\z@       & 0pt           & newdimen      & Can be used both for 0pt and 0 \\
     \Macro\maxdimen & 16383.99999pt & newdimen      & Largest valid dimension \\
   \bottomrule
@@ -375,21 +383,21 @@ This makes them useful if such characters are to be written into an auxiliary fi
   \toprule
     Macro                 & Value                        & Note\\
   \midrule
-    \Macro\space          & One space                    & An explicit space (catcode 10 ``space'').\\
+    \Macro\space          & One space                    & An explicit space (catcode 10 \qq{space}).\\
     \Macro\@spaces        & Four spaces                  & Contains $4\times$\Macro\space.\\
     \Macro\empty          & Empty string                 & Commonly used to define empty macros using \Macro\let. \\
     \Macro\@empty         & Empty string                 & Same as above. Used by the \LaTeX{} kernel commands. \\
-    \Macro\@backslashchar & ``\texttt{\@backslashchar}'' & Backslash with catcode 12 (other), i.e. simple ASCII backlash usable in e.g.\ \Macro\write.\\
-    \Macro\@percentchar   & ``\texttt{\@percentchar}''   & Percent character with catcode 12 (other), i.e. simple ASCII percent usable in e.g.\ \Macro\write.\\
-    \Macro\@charlb        & ``\texttt{\@charlb}''        & Left brace with catcode 11 (letter). \\
-    \Macro\@charrb        & ``\texttt{\@charrb}''        & Right brace with catcode 11 (letter). \\
-    \Macro\@clsextension  & ``\texttt{cls}''             & Used for comparison with \Macro\@currext. \\
-    \Macro\@pkgextension  & ``\texttt{sty}''             & Used for comparison with \Macro\@currext. \\
-    \Macro\@depth         & ``\texttt{depth}''           & Used for box size declarations (\Macro\hb@xt@).\\
-    \Macro\@height        & ``\texttt{height}''          & Used for box size declarations.\\
-    \Macro\@width         & ``\texttt{width}''           & Used for box size declarations.\\
-    \Macro\@minus         & ``\texttt{minus}''           & Used for skip declarations.\\
-    \Macro\@plus          & ``\texttt{plus}''            & Used for skip declarations.\\
+    \Macro\@backslashchar & \qq{\texttt{\@backslashchar}} & Backslash with catcode 12 (other), i.e. simple ASCII backlash usable in e.g.\ \Macro\write.\\
+    \Macro\@percentchar   & \qq{\texttt{\@percentchar}}   & Percent character with catcode 12 (other), i.e. simple ASCII percent usable in e.g.\ \Macro\write.\\
+    \Macro\@charlb        & \qq{\texttt{\@charlb}}        & Left brace with catcode 11 (letter). \\
+    \Macro\@charrb        & \qq{\texttt{\@charrb}}        & Right brace with catcode 11 (letter). \\
+    \Macro\@clsextension  & \qq{\texttt{cls}}             & Used for comparison with \Macro\@currext. \\
+    \Macro\@pkgextension  & \qq{\texttt{sty}}             & Used for comparison with \Macro\@currext. \\
+    \Macro\@depth         & \qq{\texttt{depth}}           & Used for box size declarations (\Macro\hb@xt@).\\
+    \Macro\@height        & \qq{\texttt{height}}          & Used for box size declarations.\\
+    \Macro\@width         & \qq{\texttt{width}}           & Used for box size declarations.\\
+    \Macro\@minus         & \qq{\texttt{minus}}           & Used for skip declarations.\\
+    \Macro\@plus          & \qq{\texttt{plus}}            & Used for skip declarations.\\
   \bottomrule
 \end{tabularx}
 
@@ -439,7 +447,7 @@ code. Care must also be taken if they are used together with external macros, wh
   \Macro\@tempcnta   & counter           & \\
   \Macro\@tempcntb   & counter           & \\
   \Macro\dimen@      & dimension         & \\
-  \Macro\dimen@i     & dimension         & Marked as ``global only'' \\
+  \Macro\dimen@i     & dimension         & Marked as \qq{global only} \\
   \Macro\dimen@ii    & dimension         & \\
   \Macro\@tempdima   & dimension \\
   \Macro\@tempdimb   & dimension \\
@@ -455,7 +463,7 @@ code. Care must also be taken if they are used together with external macros, wh
   \Macro\@temptokena & token register \\
   \Macro\if@tempswa  & if switch         & Comes with the usual setters \Macro\@tempswatrue and \Macro\@tempswafalse \\
   \Macro\@tempboxa   & box register \\
-  \Macro\@let@token  & `let'  & Used by \Macro\@ifnextchar to temporary store the next token using \Macro\futurelet. Can be used for similar purposes. \\
+  \Macro\@let@token  & \q{let}  & Used by \Macro\@ifnextchar to temporary store the next token using \Macro\futurelet. Can be used for similar purposes. \\
   \bottomrule
 \end{tabularx}
 
@@ -473,8 +481,8 @@ code. Care must also be taken if they are used together with external macros, wh
    \bottomrule
 \end{tabularx}
 
- %\Macro\@pushfilename & pushes file name, extension and current catcode of `|@|' onto the file stack. \\
- %\Macro\@popfilename  & pushes file name, extension and current catcode of `|@|' onto the file stack. \\
+ %\Macro\@pushfilename & pushes file name, extension and current catcode of "@" onto the file stack. \\
+ %\Macro\@popfilename  & pushes file name, extension and current catcode of "@" onto the file stack. \\
  %\Macro\@currnamestack & file name stack.\\
 
 
@@ -496,7 +504,7 @@ Tests if next non-space token is equal to \MacroArgs<token>.
 
 \DescribeMacro\@ifstar{<yes>}{<no>}
 \noindent
-Tests of next non-space token is `|*|`. Removes star for \MacroArgs<yes> branch.   
+Tests of next non-space token is "*". Removes star for \MacroArgs<yes> branch.   
 
 \DescribeMacro\@dblarg{<cmd>}{<arg>}
 \noindent
@@ -508,8 +516,8 @@ Tests if \MacroArgs!\@backslashchar!<name> is defined (and not equal to \Macro\r
 
 \DescribeMacro\@ifdefinable'\'<name>{<yes>}
 \noindent
-Tests if \MacroArgs'\'<name> is undefined, \MacroArgs<name> not `|relax|'
-and doesn't start with `|end|', and if \Macro{end}<name> is not defined. 
+Tests if \MacroArgs'\'<name> is undefined, \MacroArgs<name> not "relax"
+and doesn't start with "end", and if \Macro{end}<name> is not defined. 
 
 \DescribeMacro\@onlypreamble<macro>
 \noindent
@@ -517,7 +525,7 @@ The given \meta{macro} is marked as only be valid in the preamble. It will be re
 
 \DescribeMacro\@star@or@long
 \noindent
-Tests for a following `|*|', if found \Macro\l@ngrel@x will be let to \Macro\relax, but \Macro\long
+Tests for a following "*", if found \Macro\l@ngrel@x will be let to \Macro\relax, but \Macro\long
 otherwise. It can the be used before \Macro\def as an potential prefix.
 
 \DescribeMacro\@testopt{<1>}{<2>} 
@@ -592,9 +600,9 @@ See the definitions of \Macro\sbox for an example.
   \Macro\color@begingroup & \Macro\begingroup \\
   \Macro\color@endgroup   & \Macro\endgroup \\
   \Macro\color@setgroup   & \Macro\begingroup\set@color \\
-  \Macro\color@hbox       & \hbox\bgroup\color@begingroup \\
-  \Macro\color@vbox       & \vbox\bgroup\color@begingroup \\
-  \Macro\color@endbox     & \color@endgroup\egroup \\
+  \Macro\color@hbox       & |\hbox\bgroup\color@begingroup| \\
+  \Macro\color@vbox       & |\vbox\bgroup\color@begingroup|\\
+  \Macro\color@endbox     & |\color@endgroup\egroup| \\
 \end{tabular}
 
 \subsection{Auxiliary Macros}
@@ -615,7 +623,7 @@ This auxiliary macros were originally defined to handle font changes but can be 
    \Macro\@nil  & This macro is undefined on purpose and used as endmarker in loops and other macros which process token lists. \\
    \Macro\@nnil & Definition contains only \Macro\@nil and is used beside others to test for the presents of \Macro\@nil in \Macro\ifnot@nil. Is also used as endmarker.\\
    \Macro\remove@to@nnil & Removes everything behind it until and including \Macro\@nnil.\\
-   \Macro\remove@star & Removes everything behind it until and including `|*|'.\\
+   \Macro\remove@star & Removes everything behind it until and including *.\\
    \bottomrule
 \end{tabularx}
 
@@ -626,15 +634,15 @@ Inside a message this macro create a new line followed by a continuation text. O
 
 \DescribeMacro\GenericInfo{<continuation>}{<message>}
 \noindent
-Prints \meta{message} to a log file. Included \Macro\MessageBreak\relax's will cause a new line which start with \meta{continuation}.
+Prints \meta{message} to a log file. An included \Macro\MessageBreak\relax will cause a new line which start with \meta{continuation}.
 
 \DescribeMacros
   \hbox{\Macro\GenericError{<continuation>}{<error message>}}%
   \hbox{\phantom{\ttfamily\textbackslash GenericError}\MacroArgs{<where to go for further information>}{<help text>}}%
 \endDescribeMacros
 \noindent
-Print error message to log file followed by the `further information' line.
-The help text is displayed if the user presses `|h|'.
+Print error message to log file followed by the \q{further information} line.
+The help text is displayed if the user presses "h".
 
 \DescribeMacro\wlog{<log message>}
 \noindent
@@ -646,10 +654,10 @@ Write on log file only.
   Name   &   Description    \\
   \midrule
    \Macro\zap@space<text>!\verb*+ +!\AlsoMacro\@empty & Removes all spaces from \meta{text}. Expandable. \\
-   \Macro\strip@prefix & Removes everything up to and including to the next `|>|' \\
-   \Macro\@makeother{<letter>} & Changes the catcode of the letter to `other' (12). Special letters must be escaped with a backslash. \\
-   \Macro\@sanitize & Changes catcodes of everything except braces to `other' (12).\\
-   \Macro\@onelevel@sanitize<macro> & Sanitizes \meta{macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode `other' (12)!
+   \Macro\strip@prefix & Removes everything up to and including to the next > \\
+   \Macro\@makeother{<letter>} & Changes the catcode of the letter to \q{other} (12). Special letters must be escaped with a backslash. \\
+   \Macro\@sanitize & Changes catcodes of everything except braces to \q{other} (12).\\
+   \Macro\@onelevel@sanitize<macro> & Sanitizes \meta{macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode \q{other} (12)!
                               Uses \Macro\meaning and \Macro\strip@prefix. \\
  \bottomrule
 \end{tabularx}
@@ -660,15 +668,15 @@ Write on log file only.
   Name   &   Description    \\
   \midrule
    \Macro\@settopoint<register>   & Rounds register to whole number of points. \\
-   \Macro\rem@pt<dimension value> & Awaits a value dimension value (\MacroArgs<int>'.'<frac>'pt') as string where the `|pt|' is removed. If \meta{frac} is numerical equal to 0, then it and the decimal dot are removed as well. \\
-   \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the `|pt|' using \Macro\rem@pt. \\
+   \Macro\rem@pt<dimension value> & Awaits a value dimension value (\MacroArgs<int>'.'<frac>'pt') as string where the "pt" is removed. If \meta{frac} is numerical equal to 0, then it and the decimal dot are removed as well. \\
+   \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the "pt" using \Macro\rem@pt. \\
  \bottomrule
 \end{tabularx}
 
 \DescribeMacro\@defaultunits
 \noindent
 Used to provide a default unit for |dimen| or |skip| assignment. Usage: |\@defaultunits\dimen=#1pt\relax\@nnil|.
-Other units can be used instead of `|pt|'.
+Other units can be used instead of "pt".
 
 
 \subsection{File related Macros}
@@ -679,7 +687,7 @@ Other units can be used instead of `|pt|'.
    \midrule
    \Macro\if@filesw & If false the package should not be produce or write to output files. Set to false by \cs{nofiles}.\\
    \Macro\if@partsw & \\
-   \Macro\@currdir  & Holds the current directory, e.g. `|./|' in an Unix OS. \\
+   \Macro\@currdir  & Holds the current directory, e.g. "./" in an Unix OS. \\
    \Macro\input@path & List of input paths. Each path should be enclosed in braces with no delimiters between paths. \\
    \Macro\@filelist & The comma separated list of all files read so far. Only active if \cs{listfiles} is used in the preamble. \\
    \Macro\@classoptionslist & List of options of the main class. \\
@@ -820,15 +828,21 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
 \Macro\@currentlabel  &  The value a \Macro\label will point to. Set by \Macro\stepcounter and \Macro\refstepcounter. \\
 \Macro\@declaredoptions & Comma separated list of the options declared by the current package or class.
 The list is in the order in which the options were declared. \\
-\if@compatibility & Switch to indicate if the LaTeX2.09 compatibility mode is active. \\
-\@classoptionslist & List of options of the main class. \\
+\Macro{if@compatibility} & Switch to indicate if the LaTeX2.09 compatibility mode is active. \\
+\Macro\@classoptionslist & List of options of the main class. \\
    \bottomrule
 \end{tabularx}
 
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
 \Macro\@currsize & Let to the last font size command (e.g.\ |\small|) \\
 \Macro\@gobblecr & Gobbles a following carriage return, ignores spaces otherwise \\
 \Macro\hb@xt@    & |\hbox to| \\
 \Macro\hmode@bgroup & |\leavevmode\bgroup| \\
+   \bottomrule
+\end{tabularx}
 
 \DescribeMacros
  \Macro\f@encoding
@@ -839,6 +853,10 @@ The list is in the order in which the options were declared. \\
 \endDescribeMacros
 Hold the current font encoding, family, series, shape and size (in pt but without unit).
 
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
 \Macro\if@ignore     Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.
 
 \Macro\@inputcheck   Input file handle to check for the existence of the file.
@@ -851,7 +869,7 @@ Hold the current font encoding, family, series, shape and size (in pt but withou
 
 \Macro\two@digits{<number>}
 Returns \meta{number} (e.g.\ a |count| register) as string and ensures that it has at least two digits 
-by appending a `|0|' if required.
+by appending a "0" if required.
 
 \Macro\@currenvline  & Line number of the begin of the current environment \\
 
@@ -870,10 +888,12 @@ Holds the comma-separated list defined by \Macro\includeonly.
 \Macro\if@twoside     & True for two-sided documents \\
 \Macro\if@twocolumn   & Indicates if two-column mode is active \\
 \Macro\if@firstcolumn & Indicates if the first column is processed \\
+   \bottomrule
+\end{tabularx}
+
 
 \Macro\@removeelement{<element>}{<list>}{<cs>}
 Removes an element from a comma-separated list and puts it into a control sequence.
-
 
 % ToDo Check footnote makros
 
