@@ -266,6 +266,8 @@
 \author{Compiled by Martin Scharrer\\\url{martin@scharrer-online.de}}
 \date{Version 0.3 -- February 12th 2011}
 
+\setlength{\descindent}{0pt}
+\setlength{\parindent}{0pt}
 \makeatletter
 \begin{document}
 \maketitle
@@ -575,10 +577,10 @@ Appends \meta{code} to the definition of \MacroArgs<macro>.\\
    \Macro\@for<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is supposed to expand to a comma separated list.
         Defines \MacroArgs<macro> to each element of the list and executes \meta{body} each time.
         Supports an empty lists without errors. \\
-   \Macro\@tfor<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is not expanded and taken as a list of tokens or |{...}|.
+   \Macro\@tfor<macro>':='<list>\AlsoMacro\do{<body>} & For loop. The \MacroArgs<list> is not expanded and taken as a list of tokens or \MacroArgs{...}.
         Defines \MacroArgs<macro> to each element of the list and executes \meta{body} each time.
         Supports an empty lists without errors. \\
-   \Macro\@break@tfor & Break out of a \Macro\@tfor loop. This should be called \emph{inside} the scope of an |\fi|.\\
+   \Macro\@break@tfor & Break out of a \Macro\@tfor loop. This should be called \emph{inside} the scope of an \Macro\fi.\\
    \bottomrule
 \end{tabularx}
 \par\bigskip\noindent
@@ -589,21 +591,27 @@ NOTES:\par\vspace{-1ex}
 looks syntactically to TeX like an improperly balanced |\if \else \fi|.
 \end{enumerate}
 
+\DescribeMacro\@removeelement{<element>}{<list>}{<cs>}
+Removes an element from a comma-separated list and puts it into a control sequence.
+
 \subsection{Colors}
 The following macros are defined equal to |\relax| by LaTeX2e as placeholder for the
 real code added by the \pkg{color} or \pkg{xcolor} package.
 They are needed to handle colors inside saved boxes correctly.
 See the definitions of \Macro\sbox for an example.
 
-\begin{tabular}{ll}
-  Macro & Definition given by \pkg{color} \\
-  \Macro\color@begingroup & \Macro\begingroup \\
-  \Macro\color@endgroup   & \Macro\endgroup \\
-  \Macro\color@setgroup   & \Macro\begingroup\set@color \\
-  \Macro\color@hbox       & |\hbox\bgroup\color@begingroup| \\
-  \Macro\color@vbox       & |\vbox\bgroup\color@begingroup|\\
-  \Macro\color@endbox     & |\color@endgroup\egroup| \\
-\end{tabular}
+\begin{tabularx}{\linewidth}{lX}
+  \toprule
+    Macro & Definition given by \pkg{color} \\
+  \midrule
+    \Macro\color@begingroup & \leavevmode\Macro\begingroup \\
+    \Macro\color@endgroup   & \leavevmode\Macro\endgroup \\
+    \Macro\color@setgroup   & \leavevmode\Macro\begingroup\AlsoMacro\set@color \\
+    \Macro\color@hbox       & \leavevmode\Macro\hbox\AlsoMacro\bgroup\AlsoMacro\color@begingroup \\
+    \Macro\color@vbox       & \leavevmode\Macro\vbox\AlsoMacro\bgroup\AlsoMacro\color@begingroup \\
+    \Macro\color@endbox     & \leavevmode\Macro\color@endgroup\AlsoMacro\egroup \\
+  \bottomrule
+\end{tabularx}
 
 \subsection{Auxiliary Macros}
 
@@ -680,7 +688,7 @@ Usage: |\@defaultunits\dimen=#1pt\relax\@nnil|.
 Other units can be used instead of "pt".
 
 
-\subsection{File related Macros}
+\subsection{Files}
 
 \begin{tabularx}{\linewidth}{lX}
    \toprule
@@ -693,6 +701,21 @@ Other units can be used instead of "pt".
    \Macro\@filelist & The comma separated list of all files read so far. Only active if \cs{listfiles} is used in the preamble. \\
    \Macro\@classoptionslist & List of options of the main class. \\
    \Macro\@unusedoptionlist & List of options to the main class that haven't been declared. \\
+   \bottomrule
+\end{tabularx}
+
+\par\bigskip\par\noindent
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
+    \Macro\@inputcheck&  Input file handle to check for the existence of the file.\\
+    \Macro\@unused    &  Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.\\
+    \Macro\@mainaux   &  Output file handle for the main |aux| file.\\
+    \Macro\@partaux   &  Output file handle for include file |aux| files.\\
+    \Macro\@auxout    &  Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.\\
+    \Macro\@partlist  &
+    Holds the comma-separated list defined by \Macro\includeonly. \\
    \bottomrule
 \end{tabularx}
 
@@ -758,18 +781,36 @@ Tests if given package/class/file has been loaded with a version more recent tha
 The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved away first:
 
 \par\bigskip\noindent
-\begin{tabular}{lll}
+\begin{tabularx}{\linewidth}{llX}
    \toprule
    \LaTeX{} Macro             & plain\TeX{} original & Description/Note \\
    \midrule
    \Macro\@@par               & \Macro{par}          & Some \LaTeX{} environments redefine \Macro{par} locally \\
    \Macro\@@input             & \Macro\input         & Syntax: \Macro\input~<filename> \\
-   \Macro\@@end               & \Macro\end           & \\
+   \Macro\@@end               & \Macro{end}          & \\
    \Macro\@@underline         & \Macro\underline     & \\
    \Macro\frozen@everymath    & \Macro\everymath     & \\
    \Macro\frozen@everydisplay & \Macro\everydisplay  & \\
    \bottomrule
-\end{tabular}
+\end{tabularx}
+
+\subsection{Fonts}
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
+    \Macro\f@encoding     & Holds the current font encoding. \\
+    \Macro\f@family       & Holds the current font family. \\
+    \Macro\f@series       & Holds the current font series. \\
+    \Macro\f@shape        & Holds the current font shape. \\
+    \Macro\f@size         & Holds the current font size (in pt but without unit). \\
+    \Macro\f@baselineskip & Holds the current baseline skip (in pt but without unit). \\
+    \Macro\f@linespread   & Holds the current internal value for \Macro\baselinestretch. \\
+    \Macro\@currsize      & Let to the last font size command (e.g.\ |\small|). \\
+    \Macro\curr@math@size & Holds locally the current math size. \\
+    \Macro\curr@fontshape & |\f@encoding /\f@family /\f@series /\f@shape| \\
+   \bottomrule
+\end{tabularx}
 
 \subsection{Paragraph}
 \begin{tabularx}{\linewidth}{lX}
@@ -810,6 +851,14 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
    \bottomrule
 \end{tabularx}
 
+\DescribeMacro\@settodim{<dimension cs>}{<length register>}{<content>}
+Sets the \meta{length register} to the dimension given by the \meta{dimension} (\Macro\ht, \Macro\dp and \Macro\wd\relax) of the \meta{content}.
+Example: \Macro\@settodim{\Macro\wd}{\Macro\@tempdima}{Hello World}
+will set \Macro\@tempdima  to the width of \qq{Hello World}.
+
+
+
+
 \subsection{Base Conversion}
 \begin{tabularx}{\linewidth}{lX}
    \toprule
@@ -821,7 +870,8 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
    \bottomrule
 \end{tabularx}
 
-\subsubsection{To be sorted}
+\section*{To be sorted}
+
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
@@ -834,57 +884,41 @@ The list is in the order in which the options were declared. \\
    \bottomrule
 \end{tabularx}
 
+\bigskip\par\noindent
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
    \midrule
-\Macro\@currsize & Let to the last font size command (e.g.\ |\small|) \\
 \Macro\@gobblecr & Gobbles a following carriage return, ignores spaces otherwise \\
 \Macro\hb@xt@    & |\hbox to| \\
 \Macro\hmode@bgroup & |\leavevmode\bgroup| \\
    \bottomrule
 \end{tabularx}
 
-\DescribeMacros
- \Macro\f@encoding
- \Macro\f@family
- \Macro\f@series
- \Macro\f@shape
- \Macro\f@size
-\endDescribeMacros
-Hold the current font encoding, family, series, shape and size (in pt but without unit).
-
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
    \midrule
-\Macro\if@ignore     Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.
-
-\Macro\@inputcheck   Input file handle to check for the existence of the file.
-\Macro\@unused       Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.
-\Macro\@mainaux      Output file handle for the main |aux| file.
-\Macro\@partaux      Output file handle for include file |aux| files.
-\Macro\@auxout       Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.
-
-\Macro\@settodim{<dimension macro>}{<length register>}{<content>}
-
-\Macro\two@digits{<number>}
-Returns \meta{number} (e.g.\ a |count| register) as string and ensures that it has at least two digits 
-by appending a "0" if required.
-
+\Macro\if@ignore  &  Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.\\
 \Macro\@currenvline  & Line number of the begin of the current environment \\
-
+\Macro\@inputcheck&  Input file handle to check for the existence of the file.\\
+\Macro\@unused    &  Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.\\
+\Macro\@mainaux   &  Output file handle for the main |aux| file.\\
+\Macro\@partaux   &  Output file handle for include file |aux| files.\\
+\Macro\@auxout    &  Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.\\
+\Macro\two@digits{<number>} &
+Returns \meta{number} (e.g.\ a |count| register) as string and ensures that it has at least two digits 
+by appending a "0" if required. \\
 \Macro\if@minipage  & True for a |minipage|, false for a |parbox|. Responsible for adding space, skips and paragraph indents for a |parbox|.\\
+\Macro\@wholewidth & 
+This |dimen| register holds the half line width (thickness) in \env{picture} environments. \\
+\Macro\@halfwidth  &
+This |dimen| register hold the full line width (thickness) in \env{picture} environments. \\
+\Macro\@killglue & 
+Removes (|\unskip|s) the last and then all further skips (|\lastskip|) till one with a size of zero is reached. \\
 
-\Macro\@wholewidth
-\Macro\@halfwidth
-This |dimen| registers hold the full and half line width (thickness) in \env{picture} environments.
-
-\Macro\@killglue
-Removes (|\unskip|s) the last and then all further skips (|\lastskip|) till one with a size of zero is reached.
-
-\Macro\@partlist
-Holds the comma-separated list defined by \Macro\includeonly.
+\Macro\@partlist &
+Holds the comma-separated list defined by \Macro\includeonly. \\
 
 \Macro\if@twoside     & True for two-sided documents \\
 \Macro\if@twocolumn   & Indicates if two-column mode is active \\
@@ -893,10 +927,8 @@ Holds the comma-separated list defined by \Macro\includeonly.
 \end{tabularx}
 
 
-\Macro\@removeelement{<element>}{<list>}{<cs>}
-Removes an element from a comma-separated list and puts it into a control sequence.
-
 % ToDo Check footnote makros
+
 
 \end{document}
 
