@@ -1,5 +1,5 @@
 %&pdflatex
-% $Id$
+% $Id: macros2e.tex 2521 2011-07-23 19:14:33Z martin $
 \documentclass[12pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{ydoc-desc}[2010/02/16]
@@ -17,6 +17,7 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{multicol}
 
 \usepackage{zref-user}
 \usepackage{zref-abspos}
@@ -264,7 +265,7 @@
 
 \title{List of internal \LaTeX2e Macros useful to Package Authors}
 \author{Compiled by Martin Scharrer\\\url{martin@scharrer-online.de}}
-\date{Version 0.3 -- February 12th 2011}
+\date{Version 0.4 -- July 23rd 2011}
 
 \setlength{\descindent}{0pt}
 \setlength{\parindent}{0pt}
@@ -276,12 +277,12 @@ This document lists the internal macros defined by the \LaTeX2e base files which
 to package authors.  The macros are hyper-linked to their description in \emph{source2e}.
 For this to work both PDFs must be inside the same directory.
 
-This document is not yet complete in content and format and may miss some macros. Several macros are
-not yet sorted in the correct category.
+This document is not yet complete in content and format and may miss some macros. 
 \end{abstract}
 
-
+\begin{multicols}{2}
 \tableofcontents
+\end{multicols}
 
 \clearpage
 
@@ -470,25 +471,36 @@ code. Care must also be taken if they are used together with external macros, wh
 \end{tabularx}
 
 
-\subsection{String Variables}
+\subsection{Dimension Variables}
 
 \par\bigskip\noindent
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
    \midrule
-   \Macro\@currenvir & Name of the current environment. \\
-   \Macro\@currext   & Extension of the current package or class file, empty outside. \\
-   \Macro\@currname  & File name base of the current package or class file, empty outside. \\
+   \Macro\@wholewidth & 
+   This |dimen| register holds the half line width (thickness) in \env{picture} environments. \\
+   \Macro\@halfwidth  &
+   This |dimen| register hold the full line width (thickness) in \env{picture} environments. \\
    \bottomrule
 \end{tabularx}
 
- %\Macro\@pushfilename & pushes file name, extension and current catcode of "@" onto the file stack. \\
- %\Macro\@popfilename  & pushes file name, extension and current catcode of "@" onto the file stack. \\
- %\Macro\@currnamestack & file name stack.\\
+\subsection{String and Other Variables}
+
+\par\bigskip\noindent
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
+   \Macro\@currext   & Extension of the current package or class file, empty outside. \\
+   \Macro\@currname  & File name base of the current package or class file, empty outside. \\
+   \Macro\@currenvir & Name of the current environment. \\
+   \Macro\@currenvline  & Line number of the begin of the current environment \\
+   \Macro\@currentlabel  &  The value a \Macro\label will point to. Set by \Macro\stepcounter and \Macro\refstepcounter. \\
+   \bottomrule
+\end{tabularx}
 
 
-\clearpage
 \section{Macros}
 
 \subsection{Macro Definition}
@@ -555,6 +567,7 @@ Appends \meta{code} to the definition of \MacroArgs<macro>.\\
    \Macro\@gobble{<arg>} & Removes (gobbles) its argument. (long)\\
    \Macro\@gobbletwo{<arg 1>}{<arg 2>} & Removes (gobbles) two arguments. (long)\\
    \Macro\@gobblefour{<1>}{<2>}{<3>}{<4>} & Removes (gobbles) four arguments. (long)\\
+   \Macro\@gobblecr & Gobbles a following carriage return, ignores spaces otherwise \\
    \Macro\@firstofone{<arg>} & Expands to \meta{arg}, i.e. is used to remove braces. (long)\\
    \Macro\@iden{<arg>} & Identity. Same as \Macro\@firstofone for compatibility reasons. (long)\\
    \Macro\@firstoftwo{<1>}{<2>}  & Expands to \meta{1}, discards \meta{2}. (long)\\
@@ -564,8 +577,16 @@ Appends \meta{code} to the definition of \MacroArgs<macro>.\\
    \bottomrule
 \end{tabularx}
 
+\subsection{Lists}
+
+\DescribeMacro\in@{<1>}{<2>}
+Checks if first argument occurs in the second and sets the switch \Macro\ifin@ accordantly.
+The arguments are not expanded. This must be done beforehand.
+
+\DescribeMacro\@removeelement{<element>}{<list>}{<cs>}
+Removes an element from a comma-separated list and puts it into a control sequence.
+
 \subsection{Loops}
-\par\bigskip\noindent
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
@@ -591,9 +612,6 @@ NOTES:\par\vspace{-1ex}
 looks syntactically to TeX like an improperly balanced |\if \else \fi|.
 \end{enumerate}
 
-\DescribeMacro\@removeelement{<element>}{<list>}{<cs>}
-Removes an element from a comma-separated list and puts it into a control sequence.
-
 \subsection{Colors}
 The following macros are defined equal to |\relax| by LaTeX2e as placeholder for the
 real code added by the \pkg{color} or \pkg{xcolor} package.
@@ -615,11 +633,6 @@ See the definitions of \Macro\sbox for an example.
 
 \subsection{Auxiliary Macros}
 
-\DescribeMacro\in@{<1>}{<2>}
-\noindent
-Checks if first argument occurs in the second and sets the switch \Macro\ifin@ accordantly.
-The arguments are not expanded. This must be done beforehand.
-
 This auxiliary macros were originally defined to handle font changes but can be used for other code as well.
 \par\bigskip\noindent
 \begin{tabularx}{\linewidth}{lX}
@@ -632,8 +645,25 @@ This auxiliary macros were originally defined to handle font changes but can be 
    \Macro\@nnil & Definition contains only \Macro\@nil and is used beside others to test for the presents of \Macro\@nil in \Macro\ifnot@nil. Is also used as endmarker.\\
    \Macro\remove@to@nnil & Removes everything behind it until and including \Macro\@nnil.\\
    \Macro\remove@star & Removes everything behind it until and including *.\\
+   \Macro\zap@space<text>!\verb*+ +!\AlsoMacro\@empty & Removes all spaces from \meta{text}. Expandable. \\
+   \Macro\strip@prefix & Removes everything up to and including to the next \texttt{>}. \\
    \bottomrule
 \end{tabularx}
+
+\subsection{Catcodes}
+
+\par\bigskip\noindent
+\begin{tabularx}{\linewidth}{lX}
+  \toprule
+  Name   &   Description    \\
+  \midrule
+   \Macro\strip@prefix & Removes everything up to and including to the next \texttt{>}. \\
+   \Macro\@makeother{<letter>} & Changes the catcode of the letter to \q{other} (12). Special letters must be escaped with a backslash. \\
+   \Macro\@sanitize & Changes catcodes of everything except braces to \q{other} (12).\\
+   \Macro\@onelevel@sanitize<macro> & Sanitizes \meta{macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode \q{other} (12)! Uses \Macro\meaning and \Macro\strip@prefix. (With $\epsilon$-\TeX\ many applications can be replaced by \Macro\detokenize{<content>}.)  \\
+ \bottomrule
+\end{tabularx}
+
 
 \subsection{Messages}
 \DescribeMacro\MessageBreak
@@ -656,19 +686,7 @@ The help text is displayed if the user presses "h".
 \noindent
 Write on log file only.
 
-\par\bigskip\noindent
-\begin{tabularx}{\linewidth}{lX}
-  \toprule
-  Name   &   Description    \\
-  \midrule
-   \Macro\zap@space<text>!\verb*+ +!\AlsoMacro\@empty & Removes all spaces from \meta{text}. Expandable. \\
-   \Macro\strip@prefix & Removes everything up to and including to the next > \\
-   \Macro\@makeother{<letter>} & Changes the catcode of the letter to \q{other} (12). Special letters must be escaped with a backslash. \\
-   \Macro\@sanitize & Changes catcodes of everything except braces to \q{other} (12).\\
-   \Macro\@onelevel@sanitize<macro> & Sanitizes \meta{macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode \q{other} (12)!
-                              Uses \Macro\meaning and \Macro\strip@prefix. \\
- \bottomrule
-\end{tabularx}
+\subsection{Dimensions, Length and Skips}
 
 \par\bigskip\noindent
 \begin{tabularx}{\linewidth}{lX}
@@ -678,6 +696,8 @@ Write on log file only.
    \Macro\@settopoint<register>   & Rounds register to whole number of points. \\
    \Macro\rem@pt<dimension value> & Awaits a value dimension value (\MacroArgs<int>'.'<frac>'pt') as string where the "pt" is removed. If \meta{frac} is numerical equal to 0, then it and the decimal dot are removed as well. \\
    \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the "pt" using \Macro\rem@pt. \\
+   \Macro\@killglue & 
+   Removes (|\unskip|s) the last and then all further skips (|\lastskip|) till one with a size of zero is reached. \\
  \bottomrule
 \end{tabularx}
 
@@ -687,6 +707,18 @@ Used to provide a default unit for |dimen| or |skip| assignment.\\
 Usage: |\@defaultunits\dimen=#1pt\relax\@nnil|.
 Other units can be used instead of "pt".
 
+\subsection{Class and Package Options}
+
+\begin{tabularx}{\linewidth}{lX}
+   \toprule
+   Macro & Description \\
+   \midrule
+    \Macro\@classoptionslist & List of options of the main class. \\
+    \Macro\@unusedoptionlist & List of options to the main class that haven't been declared. \\
+    \Macro\@declaredoptions & Comma separated list of the options declared by the current package or class.
+    The list is in the order in which the options were declared. \\
+   \bottomrule
+\end{tabularx}
 
 \subsection{Files}
 
@@ -699,25 +731,18 @@ Other units can be used instead of "pt".
    \Macro\@currdir  & Holds the current directory, e.g. "./" in an Unix OS. \\
    \Macro\input@path & List of input paths. Each path should be enclosed in braces with no delimiters between paths. \\
    \Macro\@filelist & The comma separated list of all files read so far. Only active if \cs{listfiles} is used in the preamble. \\
-   \Macro\@classoptionslist & List of options of the main class. \\
-   \Macro\@unusedoptionlist & List of options to the main class that haven't been declared. \\
+   \Macro\@inputcheck&  Input file handle to check for the existence of the file.\\
+   \Macro\@unused    &  Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.\\
+   \Macro\@mainaux   &  Output file handle for the main |aux| file.\\
+   \Macro\@partaux   &  Output file handle for include file |aux| files.\\
+   \Macro\@auxout    &  Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.\\
+   \Macro\@partlist  &  Holds the comma-separated list defined by \Macro\includeonly. \\
+   \Macro\@pushfilename & pushes file name, extension and current catcode of "@" onto the file stack. \\
+   \Macro\@popfilename  & pushes file name, extension and current catcode of "@" onto the file stack. \\
+   \Macro\@currnamestack & file name stack.\\
    \bottomrule
 \end{tabularx}
 
-\par\bigskip\par\noindent
-\begin{tabularx}{\linewidth}{lX}
-   \toprule
-   Macro & Description \\
-   \midrule
-    \Macro\@inputcheck&  Input file handle to check for the existence of the file.\\
-    \Macro\@unused    &  Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.\\
-    \Macro\@mainaux   &  Output file handle for the main |aux| file.\\
-    \Macro\@partaux   &  Output file handle for include file |aux| files.\\
-    \Macro\@auxout    &  Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.\\
-    \Macro\@partlist  &
-    Holds the comma-separated list defined by \Macro\includeonly. \\
-   \bottomrule
-\end{tabularx}
 
 \DescribeMacro\filename@parse{<filename>}
 \noindent
@@ -848,6 +873,8 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
    \Macro\@arstrutbox & Defined inside array and tabular. Like \Macro\strutbox but stretched by \Macro\arraystretch. \\
    \Macro\@begin@tempboxa<box>{<content>} & Stores \meta{content} into \Macro\@tempboxa as \meta{box} (\cs{hbox} or \cs{vbox}) and stores its dimension into \Macro\width, \Macro\height, \Macro\depth and \Macro\totalheight. \\
    \Macro\@end@tempboxa  & Ends a \Macro\@begin@tempboxa environment. \\
+   \Macro\hb@xt@    & \Macro\hbox~'to' \\
+   \Macro\hmode@bgroup & \Macro\leavevmode\AlsoMacro\bgroup \\
    \bottomrule
 \end{tabularx}
 
@@ -867,62 +894,24 @@ will set \Macro\@tempdima  to the width of \qq{Hello World}.
      \Macro\hexnumber@{<number>} & Returns a single digit hexadecimal number (\mbox{0--9}, \mbox{A--F}) from given \meta{number}, which must either be a numeric register or a number ending with a space! \\
      \Macro\@alph{<number>} & Expands to lower case letter corresponding to the given number (1=a, 2=b, \ldots). Expands to \Macro\@ctrerr if number is larger then~26.\\
      \Macro\@Alph{<number>} & Expands to upper case letter corresponding to the given number (1=A, 2=B, \ldots). Expands to \Macro\@ctrerr if number is larger then~26.\\
+    \Macro\two@digits{<number>} &
+        Returns \meta{number} (e.g.\ a |count| register) as string and ensures that it has at least two digits 
+        by appending a "0" if required. \\
    \bottomrule
 \end{tabularx}
 
-\section*{To be sorted}
+\subsection{Conditionals}
 
 \begin{tabularx}{\linewidth}{lX}
    \toprule
    Macro & Description \\
    \midrule
-\Macro\@currentlabel  &  The value a \Macro\label will point to. Set by \Macro\stepcounter and \Macro\refstepcounter. \\
-\Macro\@declaredoptions & Comma separated list of the options declared by the current package or class.
-The list is in the order in which the options were declared. \\
 \Macro{if@compatibility} & Switch to indicate if the LaTeX2.09 compatibility mode is active. \\
-\Macro\@classoptionslist & List of options of the main class. \\
-   \bottomrule
-\end{tabularx}
-
-\bigskip\par\noindent
-\begin{tabularx}{\linewidth}{lX}
-   \toprule
-   Macro & Description \\
-   \midrule
-\Macro\@gobblecr & Gobbles a following carriage return, ignores spaces otherwise \\
-\Macro\hb@xt@    & |\hbox to| \\
-\Macro\hmode@bgroup & |\leavevmode\bgroup| \\
-   \bottomrule
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{lX}
-   \toprule
-   Macro & Description \\
-   \midrule
-\Macro\if@ignore  &  Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.\\
-\Macro\@currenvline  & Line number of the begin of the current environment \\
-\Macro\@inputcheck&  Input file handle to check for the existence of the file.\\
-\Macro\@unused    &  Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.\\
-\Macro\@mainaux   &  Output file handle for the main |aux| file.\\
-\Macro\@partaux   &  Output file handle for include file |aux| files.\\
-\Macro\@auxout    &  Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.\\
-\Macro\two@digits{<number>} &
-Returns \meta{number} (e.g.\ a |count| register) as string and ensures that it has at least two digits 
-by appending a "0" if required. \\
-\Macro\if@minipage  & True for a |minipage|, false for a |parbox|. Responsible for adding space, skips and paragraph indents for a |parbox|.\\
-\Macro\@wholewidth & 
-This |dimen| register holds the half line width (thickness) in \env{picture} environments. \\
-\Macro\@halfwidth  &
-This |dimen| register hold the full line width (thickness) in \env{picture} environments. \\
-\Macro\@killglue & 
-Removes (|\unskip|s) the last and then all further skips (|\lastskip|) till one with a size of zero is reached. \\
-
-\Macro\@partlist &
-Holds the comma-separated list defined by \Macro\includeonly. \\
-
-\Macro\if@twoside     & True for two-sided documents \\
-\Macro\if@twocolumn   & Indicates if two-column mode is active \\
-\Macro\if@firstcolumn & Indicates if the first column is processed \\
+\Macro{if@ignore} &  Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.\\
+\Macro{if@minipage} & True for a |minipage|, false for a |parbox|. Responsible for adding space, skips and paragraph indents for a |parbox|.\\
+\Macro{if@twoside}    & True for two-sided documents \\
+\Macro{if@twocolumn}  & Indicates if two-column mode is active \\
+\Macro{if@firstcolumn}& Indicates if the first column is processed \\
    \bottomrule
 \end{tabularx}
 
