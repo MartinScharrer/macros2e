@@ -658,7 +658,6 @@ This auxiliary macros were originally defined to handle font changes but can be 
   \toprule
   Name   &   Description    \\
   \midrule
-   \Macro\strip@prefix & Removes everything up to and including to the next \texttt{>}. \\
    \Macro\@makeother{<letter>} & Changes the catcode of the letter to \q{other} (12). Special letters must be escaped with a backslash. \\
    \Macro\@sanitize & Changes catcodes of everything except braces to \q{other} (12).\\
    \Macro\@onelevel@sanitize<macro> & Sanitizes \meta{macro}, turns it definition into verbatim code. Resulting characters except spaces are in catcode \q{other} (12)! Uses \Macro\meaning and \Macro\strip@prefix. (With $\epsilon$-\TeX\ many applications can be replaced by \Macro\detokenize{<content>}.)  \\
