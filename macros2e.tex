@@ -10,6 +10,7 @@
 \MakeSpecialShortVerb\qverb\"
 \AtBeginDocument{\MakeShortMacroArgs*\`}
 \AtEndDocument{\DeleteShortMacroArgs\`}
+\newcommand\Q[1]{``\texttt{#1}''}
 
 \usepackage{hyperref}
 \usepackage{xcolor}
@@ -694,8 +695,8 @@ Write on log file only.
   Name   &   Description    \\
   \midrule
    \Macro\@settopoint<register>   & Rounds register to whole number of points. \\
-   \Macro\rem@pt<dimension value> & Awaits a value dimension value (\MacroArgs<int>'.'<frac>'pt') as string where the "pt" is removed. If \meta{frac} is numerical equal to 0, then it and the decimal dot are removed as well. \\
-   \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the "pt" using \Macro\rem@pt. \\
+   \Macro\rem@pt<dimension value> & Awaits a value dimension value (\MacroArgs<int>'.'<frac>'pt') as string where the \Q{pt} is removed. If \meta{frac} is numerical equal to 0, then it and the decimal dot are removed as well. \\
+   \Macro\strip@pt<dimension>     & Expands dimension using \cs{the} and strips the \Q{pt} using \Macro\rem@pt. \\
    \Macro\@killglue & 
    Removes (|\unskip|s) the last and then all further skips (|\lastskip|) till one with a size of zero is reached. \\
  \bottomrule
@@ -728,17 +729,17 @@ Other units can be used instead of "pt".
    \midrule
    \Macro\if@filesw & If false the package should not be produce or write to output files. Set to false by \cs{nofiles}.\\
    \Macro\if@partsw & \\
-   \Macro\@currdir  & Holds the current directory, e.g. "./" in an Unix OS. \\
+   \Macro\@currdir  & Holds the current directory, e.g. \Q{./} in an Unix OS. \\
    \Macro\input@path & List of input paths. Each path should be enclosed in braces with no delimiters between paths. \\
    \Macro\@filelist & The comma separated list of all files read so far. Only active if \cs{listfiles} is used in the preamble. \\
    \Macro\@inputcheck&  Input file handle to check for the existence of the file.\\
    \Macro\@unused    &  Output file handle used to reserve the standard output. Used in \Macro\typeout to write to the terminal.\\
-   \Macro\@mainaux   &  Output file handle for the main |aux| file.\\
-   \Macro\@partaux   &  Output file handle for include file |aux| files.\\
+   \Macro\@mainaux   &  Output file handle for the main \texttt{aux} file.\\
+   \Macro\@partaux   &  Output file handle for include file \texttt{aux} files.\\
    \Macro\@auxout    &  Let to \Macro\@partaux inside include files, but to \Macro\@mainaux otherwise.\\
    \Macro\@partlist  &  Holds the comma-separated list defined by \Macro\includeonly. \\
-   \Macro\@pushfilename & pushes file name, extension and current catcode of "@" onto the file stack. \\
-   \Macro\@popfilename  & pushes file name, extension and current catcode of "@" onto the file stack. \\
+   \Macro\@pushfilename & pushes file name, extension and current catcode of \Q{@} onto the file stack. \\
+   \Macro\@popfilename  & pushes file name, extension and current catcode of \Q{@} onto the file stack. \\
    \Macro\@currnamestack & file name stack.\\
    \bottomrule
 \end{tabularx}
@@ -856,7 +857,7 @@ The following plain\TeX{} macros are redefined by \LaTeX{} and therefore saved a
    \Macro\@bsphack & \\
    \Macro\@esphack & Both of these macro ensure that the code between them does not insert any spaces into the document.
     The code itself should not produce any text and not change the mode (e.g.\ start or stop math mode).\\
-   \Macro\@Esphack & Variant of \cs{@esphack} which sets the |@ignore| switch to true which causes an \cs{ignorespaces}
+    \Macro\@Esphack & Variant of \cs{@esphack} which sets the \texttt{@ignore} switch to true which causes an \cs{ignorespaces}
                 after the \cs{end} of the environment.\\
    \Macro\@vbsphack & Variant of \cs{@bsphack} which ensure the invisible material is \emph{not} set in vmode. Not used by \LaTeX{} itself at the moment. \\
    \bottomrule
@@ -895,7 +896,7 @@ will set \Macro\@tempdima  to the width of \qq{Hello World}.
      \Macro\@alph{<number>} & Expands to lower case letter corresponding to the given number (1=a, 2=b, \ldots). Expands to \Macro\@ctrerr if number is larger then~26.\\
      \Macro\@Alph{<number>} & Expands to upper case letter corresponding to the given number (1=A, 2=B, \ldots). Expands to \Macro\@ctrerr if number is larger then~26.\\
     \Macro\two@digits{<number>} &
-        Returns \meta{number} (e.g.\ a |count| register) as string and ensures that it has at least two digits 
+   Returns \meta{number} (e.g.\ a \texttt{count} register) as string and ensures that it has at least two digits 
         by appending a "0" if required. \\
    \bottomrule
 \end{tabularx}
@@ -908,7 +909,7 @@ will set \Macro\@tempdima  to the width of \qq{Hello World}.
    \midrule
 \Macro{if@compatibility} & Switch to indicate if the LaTeX2.09 compatibility mode is active. \\
 \Macro{if@ignore} &  Whether or not to ignore spaces after an environment. Set to true by \Macro\ignorespacesafterend.\\
-\Macro{if@minipage} & True for a |minipage|, false for a |parbox|. Responsible for adding space, skips and paragraph indents for a |parbox|.\\
+   \Macro{if@minipage} & True for a \texttt{minipage}, false for a \texttt{parbox}. Responsible for adding space, skips and paragraph indents for a \texttt{parbox}.\\
 \Macro{if@twoside}    & True for two-sided documents \\
 \Macro{if@twocolumn}  & Indicates if two-column mode is active \\
 \Macro{if@firstcolumn}& Indicates if the first column is processed \\
