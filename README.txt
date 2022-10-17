@@ -1,8 +1,8 @@
 
 List of internal LATEX2e Macros useful to Package Authors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Copyright (C) 2011-2017 by Martin Scharrer <martin@scharrer-online.de>
-Code Repository: https://bitbucket.org/martin_scharrer/macros2e
+Copyright (c) 2011-2022 by Martin Scharrer <martin.scharrer@web.de>
+Code Repository: https://github.com/MartinScharrer/macros2e/
 License: LPPL v1.3c or later
 
 This document lists the internal macros defined by the LaTeX2e base files
